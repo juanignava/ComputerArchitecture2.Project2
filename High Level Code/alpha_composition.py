@@ -16,8 +16,6 @@ Description: function that receives the path of an image and creates a list of a
 """
 def read_image(path):
     array = np.array(imageio.imread(path), dtype='int').tolist()
-    print("Beggning array")
-    print(array[1])
     list = []
     for y in range(IMAGE_SIZE_Y):
         for x in range(IMAGE_SIZE_X):
@@ -40,8 +38,6 @@ def save_image(path, list):
                 temp_pix.append(list[elem])
             temp_list.append(temp_pix)
         matrix.append(temp_list)
-    print("Beggning matrix")
-    print(matrix[1])
 
     return imageio.imwrite(path, np.array(matrix, dtype='uint8'))
 
@@ -160,21 +156,24 @@ def shader(R1, R0, G1, G0, B1, B0, T1, T0, type, list):
                 if (blue_p > 0):
                     blue_p -= blue_step
             
-            for x in range(IMAGE_SIZE_X):
-                for pix in range(3):
-                    elem = y * IMAGE_SIZE_X * 3 + x * 3 + pix
-                    if (pix == 0):
-                        color_val = list[elem]
-                        red_out = (red_p * trans) // 255 + (color_val * (255 - trans)) // 255
-                        result.append(red_out)
-                    elif (pix == 1):
-                        color_val = list[elem]
-                        green_out = (green_p * trans) // 255 + (color_val * (255 - trans)) // 255
-                        result.append(green_out)
-                    else:
-                        color_val = list[elem]
-                        blue_out = (blue_p * trans) // 255 + (color_val * (255 - trans)) // 255
-                        result.append(blue_out)
+            for x in range(0, IMAGE_SIZE_X, 2):
+                elem = y * IMAGE_SIZE_X * 3 + x * 3 
+                reg_list = [list[elem], list[elem+1], list[elem+2], list[elem+3], list[elem+4], list[elem+5]]
+                reg_col = [red_p, green_p, blue_p, red_p, green_p, blue_p]
+                reg_list_res = [0, 0, 0, 0, 0, 0]
+                
+                for i in range(6):
+                    reg_col[i]  = reg_col[i] * trans
+                    reg_col[i]  = reg_col[i] // 255
+
+                for i in range(6):
+                    reg_list[i] = reg_list[i] * (255 - trans)
+                    reg_list[i] = reg_list[i] // 255
+
+                for i in range(6):
+                    reg_list_res[i] = reg_col[i] + reg_list[i]
+
+                result += reg_list_res
 
         return result
 
@@ -188,21 +187,25 @@ def shader(R1, R0, G1, G0, B1, B0, T1, T0, type, list):
         result = []
 
         for y in range(IMAGE_SIZE_Y):
-            for x in range(IMAGE_SIZE_X):
-                for pix in range(3):
-                    elem = y * IMAGE_SIZE_X * 3 + x * 3 + pix
-                    if (pix == 0):
-                        color_val = list[elem]
-                        red_out = (red * trans) // 255 + (color_val * (255 - trans)) // 255
-                        result.append(red_out)
-                    elif (pix == 1):
-                        color_val = list[elem]
-                        green_out = (green * trans) // 255 + (color_val * (255 - trans)) // 255
-                        result.append(green_out)
-                    else:
-                        color_val = list[elem]
-                        blue_out = (blue * trans) // 255 + (color_val * (255 - trans)) // 255
-                        result.append(blue_out)
+            for x in range(0, IMAGE_SIZE_X, 2):
+                elem = y * IMAGE_SIZE_X * 3 + x * 3 
+                reg_list = [list[elem], list[elem+1], list[elem+2], list[elem+3], list[elem+4], list[elem+5]]
+                reg_col = [red, green, blue, red, green, blue]
+                reg_list_res = [0, 0, 0, 0, 0, 0]
+                
+                for i in range(6):
+                    reg_col[i]  = reg_col[i] * trans
+                    reg_col[i]  = reg_col[i] // 255
+
+                for i in range(6):
+                    reg_list[i] = reg_list[i] * (255 - trans)
+                    reg_list[i] = reg_list[i] // 255
+
+                for i in range(6):
+                    reg_list_res[i] = reg_col[i] + reg_list[i]
+
+                result += reg_list_res
+
             if (red > 0):
                 red -= red_step
             if (green > 0):
@@ -215,5 +218,5 @@ def shader(R1, R0, G1, G0, B1, B0, T1, T0, type, list):
 
 # MAIN PROGRAM
 image_list = read_image(IMAGE_PATH)
-image_vertical = shader(1, 1, 1, 1, 0, 1, 1, 0, 0, image_list)
+image_vertical = shader(1, 0, 0, 0, 1, 1, 1, 0, 1, image_list)
 save_image(IMAGE_SAVE_PATH, image_vertical)
