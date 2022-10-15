@@ -134,9 +134,9 @@ def shader(R1, R0, G1, G0, B1, B0, T1, T0, type, list):
         blue_p = 0
         up = 1
 
-        red_step = 2 * red // IMAGE_SIZE_Y 
-        green_step = 2 * green // IMAGE_SIZE_Y
-        blue_step = 2 * blue // IMAGE_SIZE_Y
+        red_step = 2
+        green_step = 2
+        blue_step = 2
 
         for y in range(IMAGE_SIZE_Y):
             if (y >= IMAGE_SIZE_Y/2):
@@ -180,9 +180,9 @@ def shader(R1, R0, G1, G0, B1, B0, T1, T0, type, list):
     # if the filter applied is vertical
     else:
 
-        red_step = red // IMAGE_SIZE_Y
-        green_step = green // IMAGE_SIZE_Y
-        blue_step = blue // IMAGE_SIZE_Y
+        red_step = 1
+        green_step = 1
+        blue_step = 1
 
         result = []
 
@@ -218,5 +218,5 @@ def shader(R1, R0, G1, G0, B1, B0, T1, T0, type, list):
 
 # MAIN PROGRAM
 image_list = read_image(IMAGE_PATH)
-image_vertical = shader(1, 0, 0, 0, 1, 1, 1, 0, 1, image_list)
+image_vertical = shader(0, 1, 0, 0, 0, 0, 1, 0, 1, image_list)
 save_image(IMAGE_SAVE_PATH, image_vertical)
