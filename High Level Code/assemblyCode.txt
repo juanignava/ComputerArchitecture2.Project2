@@ -1,0 +1,22 @@
+_valores-iniciales:
+SUM R7, R1, R3
+SUM R7, R0, R0
+DIVI R3, R7, 360
+RESI R4, R7, 360
+RESI R3, R3, 4
+RESI R4, R4, 4
+MULEV R0, R3, R4
+DIVEV R0, R3, R1
+SUMV R7, R1, R3
+SUMI R1, R2, 400
+RESI R3, R4, 400
+MULI R5, R6, 400
+DIVI R7, RV7, 400
+_pixeles_conocidos:
+DIVI R3, R7, 360
+SCI R3, R0, _pixeles_conocidos
+SCD R4, R0, _pixeles_conocidos
+CRG R5, 0(R5)
+GDR R4, 0(R4)
+CRGV R6, 0(R6)
+GDRV R6, 0(R6)
