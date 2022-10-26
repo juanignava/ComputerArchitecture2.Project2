@@ -1,6 +1,6 @@
 # IMPORTS
 import numpy as np
-import imageio
+import imageio.v2 as imageio
 
 # CONSTANS
 IMAGE_PATH = "Images/dog.jpeg"

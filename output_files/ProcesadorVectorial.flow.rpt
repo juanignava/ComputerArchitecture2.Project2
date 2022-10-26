@@ -1,6 +1,6 @@
 Flow report for ProcesadorVectorial
-Mon Oct 24 19:51:24 2022
-Quartus Prime Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
+Tue Oct 25 21:27:43 2022
+Quartus Prime Version 20.1.0 Build 711 06/05/2020 SJ Lite Edition
 
 
 ---------------------
@@ -21,9 +21,9 @@ Quartus Prime Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
 ----------------
 ; Legal Notice ;
 ----------------
-Copyright (C) 2018  Intel Corporation. All rights reserved.
+Copyright (C) 2020  Intel Corporation. All rights reserved.
 Your use of Intel Corporation's design tools, logic functions 
-and other software and tools, and its AMPP partner logic 
+and other software and tools, and any partner logic 
 functions, and any output files from any of the foregoing 
 (including device programming or simulation files), and any 
 associated documentation or information are expressly subject 
@@ -33,17 +33,18 @@ the Intel FPGA IP License Agreement, or other applicable license
 agreement, including, without limitation, that your use is for
 the sole purpose of programming logic devices manufactured by
 Intel and sold by Intel or its authorized distributors.  Please
-refer to the applicable agreement for further details.
+refer to the applicable agreement for further details, at
+https://fpgasoftware.intel.com/eula.
 
 
 
 +----------------------------------------------------------------------------------+
 ; Flow Summary                                                                     ;
 +------------------------------------+---------------------------------------------+
-; Flow Status                        ; Successful - Mon Oct 24 19:51:24 2022       ;
-; Quartus Prime Version              ; 18.1.0 Build 625 09/12/2018 SJ Lite Edition ;
+; Flow Status                        ; Successful - Tue Oct 25 21:27:43 2022       ;
+; Quartus Prime Version              ; 20.1.0 Build 711 06/05/2020 SJ Lite Edition ;
 ; Revision Name                      ; ProcesadorVectorial                         ;
-; Top-level Entity Name              ; sign_extend_tb                              ;
+; Top-level Entity Name              ; alu_tb                                      ;
 ; Family                             ; Cyclone IV GX                               ;
 ; Device                             ; EP4CGX150DF31C7                             ;
 ; Timing Models                      ; Final                                       ;
@@ -68,32 +69,32 @@ refer to the applicable agreement for further details.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 10/24/2022 19:51:06 ;
+; Start date & time ; 10/25/2022 21:27:37 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; ProcesadorVectorial ;
 +-------------------+---------------------+
 
 
-+--------------------------------------------------------------------------------------------------------------------------------------+
-; Flow Non-Default Global Settings                                                                                                     ;
-+-------------------------------------+----------------------------------------+---------------------+----------------+----------------+
-; Assignment Name                     ; Value                                  ; Default Value       ; Entity Name    ; Section Id     ;
-+-------------------------------------+----------------------------------------+---------------------+----------------+----------------+
-; COMPILER_SIGNATURE_ID               ; 145320181098442.166666266626876        ; --                  ; --             ; --             ;
-; EDA_OUTPUT_DATA_FORMAT              ; Systemverilog Hdl                      ; --                  ; --             ; eda_simulation ;
-; EDA_SIMULATION_TOOL                 ; ModelSim-Altera (SystemVerilog)        ; <None>              ; --             ; --             ;
-; EDA_TIME_SCALE                      ; 1 ps                                   ; --                  ; --             ; eda_simulation ;
-; MAX_CORE_JUNCTION_TEMP              ; 85                                     ; --                  ; --             ; --             ;
-; MIN_CORE_JUNCTION_TEMP              ; 0                                      ; --                  ; --             ; --             ;
-; NOMINAL_CORE_SUPPLY_VOLTAGE         ; 1.2V                                   ; --                  ; --             ; --             ;
-; PARTITION_COLOR                     ; -- (Not supported for targeted family) ; --                  ; sign_extend_tb ; Top            ;
-; PARTITION_FITTER_PRESERVATION_LEVEL ; -- (Not supported for targeted family) ; --                  ; sign_extend_tb ; Top            ;
-; PARTITION_NETLIST_TYPE              ; -- (Not supported for targeted family) ; --                  ; sign_extend_tb ; Top            ;
-; POWER_BOARD_THERMAL_MODEL           ; None (CONSERVATIVE)                    ; --                  ; --             ; --             ;
-; POWER_PRESET_COOLING_SOLUTION       ; 23 MM HEAT SINK WITH 200 LFPM AIRFLOW  ; --                  ; --             ; --             ;
-; PROJECT_OUTPUT_DIRECTORY            ; output_files                           ; --                  ; --             ; --             ;
-; TOP_LEVEL_ENTITY                    ; sign_extend_tb                         ; ProcesadorVectorial ; --             ; --             ;
-+-------------------------------------+----------------------------------------+---------------------+----------------+----------------+
++-----------------------------------------------------------------------------------------------------------------------------------+
+; Flow Non-Default Global Settings                                                                                                  ;
++-------------------------------------+----------------------------------------+---------------------+-------------+----------------+
+; Assignment Name                     ; Value                                  ; Default Value       ; Entity Name ; Section Id     ;
++-------------------------------------+----------------------------------------+---------------------+-------------+----------------+
+; COMPILER_SIGNATURE_ID               ; 247207016327067.166675485717784        ; --                  ; --          ; --             ;
+; EDA_OUTPUT_DATA_FORMAT              ; Systemverilog Hdl                      ; --                  ; --          ; eda_simulation ;
+; EDA_SIMULATION_TOOL                 ; ModelSim-Altera (SystemVerilog)        ; <None>              ; --          ; --             ;
+; EDA_TIME_SCALE                      ; 1 ps                                   ; --                  ; --          ; eda_simulation ;
+; MAX_CORE_JUNCTION_TEMP              ; 85                                     ; --                  ; --          ; --             ;
+; MIN_CORE_JUNCTION_TEMP              ; 0                                      ; --                  ; --          ; --             ;
+; NOMINAL_CORE_SUPPLY_VOLTAGE         ; 1.2V                                   ; --                  ; --          ; --             ;
+; PARTITION_COLOR                     ; -- (Not supported for targeted family) ; --                  ; alu_tb      ; Top            ;
+; PARTITION_FITTER_PRESERVATION_LEVEL ; -- (Not supported for targeted family) ; --                  ; alu_tb      ; Top            ;
+; PARTITION_NETLIST_TYPE              ; -- (Not supported for targeted family) ; --                  ; alu_tb      ; Top            ;
+; POWER_BOARD_THERMAL_MODEL           ; None (CONSERVATIVE)                    ; --                  ; --          ; --             ;
+; POWER_PRESET_COOLING_SOLUTION       ; 23 MM HEAT SINK WITH 200 LFPM AIRFLOW  ; --                  ; --          ; --             ;
+; PROJECT_OUTPUT_DIRECTORY            ; output_files                           ; --                  ; --          ; --             ;
+; TOP_LEVEL_ENTITY                    ; alu_tb                                 ; ProcesadorVectorial ; --          ; --             ;
++-------------------------------------+----------------------------------------+---------------------+-------------+----------------+
 
 
 +----------------------------------------------------------------------------------------------------------------------------+
@@ -101,8 +102,8 @@ refer to the applicable agreement for further details.
 +------------------------+--------------+-------------------------+---------------------+------------------------------------+
 ; Module Name            ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
 +------------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Analysis & Elaboration ; 00:00:19     ; 1.0                     ; 4777 MB             ; 00:00:39                           ;
-; Total                  ; 00:00:19     ; --                      ; --                  ; 00:00:39                           ;
+; Analysis & Elaboration ; 00:00:07     ; 1.0                     ; 4768 MB             ; 00:00:16                           ;
+; Total                  ; 00:00:07     ; --                      ; --                  ; 00:00:16                           ;
 +------------------------+--------------+-------------------------+---------------------+------------------------------------+
 
 
@@ -111,7 +112,7 @@ refer to the applicable agreement for further details.
 +------------------------+------------------+------------+------------+----------------+
 ; Module Name            ; Machine Hostname ; OS Name    ; OS Version ; Processor type ;
 +------------------------+------------------+------------+------------+----------------+
-; Analysis & Elaboration ; mswaterh-mobl    ; Windows 10 ; 10.0       ; x86_64         ;
+; Analysis & Elaboration ; Nacho-Granados   ; Windows 10 ; 10.0       ; x86_64         ;
 +------------------------+------------------+------------+------------+----------------+
 
 
