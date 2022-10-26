@@ -6,10 +6,10 @@ module sign_extend(input logic [25:0] num_in,
 		case(imm_src)
 		
 			// 27-bit unsigned immediate
-			1'b00: num_out = {{6{num_in[25]}}, num_in[25:0]};
+			1'b0: num_out = {{6{num_in[25]}}, num_in[25:0]};
 			
 			// 17-bit unsigned immediate
-			1'b01: num_out = {{14{num_in[17]}}, num_in[17:0]};
+			1'b1: num_out = {{14{num_in[17]}}, num_in[17:0]};
 			
 			default: num_out = 32'bx; // undefined
 		endcase
