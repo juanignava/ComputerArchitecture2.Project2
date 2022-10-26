@@ -18,8 +18,8 @@ module alu_6lanes #(parameter V = 192, S = 32)
 		
 	always @(*)
 	
-		case (op)
-		
+				case (op)
+
 			// case operación escalar
 			1'b0:			
 				
