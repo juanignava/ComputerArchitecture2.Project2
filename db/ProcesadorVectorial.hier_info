@@ -1,0 +1,52 @@
+|control_unit_tb
+
+
+|control_unit_tb|control_unit:control_unit_TB
+instruction_type[0] => Equal0.IN1
+instruction_type[0] => Equal3.IN0
+instruction_type[0] => Equal5.IN1
+instruction_type[1] => Equal0.IN0
+instruction_type[1] => Equal3.IN1
+instruction_type[1] => Equal5.IN0
+func[0] => Equal1.IN1
+func[0] => Equal2.IN0
+func[0] => Equal4.IN1
+func[0] => Equal6.IN1
+func[1] => Equal1.IN0
+func[1] => Equal2.IN1
+func[1] => Equal4.IN0
+func[1] => Equal6.IN0
+rst => JumpI.IN1
+rst => JumpI.DATAA
+rst => MemToReg.IN1
+rst => ALUSrc3.DATAA
+rst => ALUSrc1.IN1
+imm => always0.IN1
+imm => always0.IN1
+imm => always0.IN1
+imm => always0.IN1
+imm => always0.IN1
+vector => always0.IN1
+vector => always0.IN1
+vector => always0.IN1
+vector => always0.IN1
+vector => always0.IN1
+vector => always0.IN1
+JumpI <= JumpI$latch.DB_MAX_OUTPUT_PORT_TYPE
+JumpCI <= JumpCI$latch.DB_MAX_OUTPUT_PORT_TYPE
+JumpCD <= JumpCD$latch.DB_MAX_OUTPUT_PORT_TYPE
+MemToReg <= MemToReg$latch.DB_MAX_OUTPUT_PORT_TYPE
+MemRead <= MemRead$latch.DB_MAX_OUTPUT_PORT_TYPE
+MemWrite <= MemWrite$latch.DB_MAX_OUTPUT_PORT_TYPE
+ImmSrc <= ImmSrc$latch.DB_MAX_OUTPUT_PORT_TYPE
+VectorOp <= VectorOp$latch.DB_MAX_OUTPUT_PORT_TYPE
+ALUSrc1 <= ALUSrc1$latch.DB_MAX_OUTPUT_PORT_TYPE
+ALUSrc3 <= ALUSrc3$latch.DB_MAX_OUTPUT_PORT_TYPE
+RegVWrite <= RegVWrite$latch.DB_MAX_OUTPUT_PORT_TYPE
+RegSWrite <= RegSWrite$latch.DB_MAX_OUTPUT_PORT_TYPE
+ALUOp[0] <= ALUOp[0]$latch.DB_MAX_OUTPUT_PORT_TYPE
+ALUOp[1] <= ALUOp[1]$latch.DB_MAX_OUTPUT_PORT_TYPE
+ALUSrc2[0] <= ALUSrc2[0]$latch.DB_MAX_OUTPUT_PORT_TYPE
+ALUSrc2[1] <= ALUSrc2[1]$latch.DB_MAX_OUTPUT_PORT_TYPE
+
+
