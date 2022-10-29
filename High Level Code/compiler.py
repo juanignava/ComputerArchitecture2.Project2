@@ -168,6 +168,8 @@ def stallInsertionCase1(instructionElements, typeDictionary, opcodeDictionary):
                                 result.insert(i + 1, stall)
                                 result.insert(i + 2, stall)
                                 result.insert(i + 3, stall)
+                                result.insert(i + 4, stall)
+                                result.insert(i + 5, stall)
 
                     # memory instruction
                     elif(nextInstructionType == "01"):
@@ -185,6 +187,8 @@ def stallInsertionCase1(instructionElements, typeDictionary, opcodeDictionary):
                                 result.insert(i + 1, stall)
                                 result.insert(i + 2, stall)
                                 result.insert(i + 3, stall)
+                                result.insert(i + 4, stall)
+                                result.insert(i + 5, stall)
                         
                         # CRG instruction
                         else:
@@ -194,6 +198,8 @@ def stallInsertionCase1(instructionElements, typeDictionary, opcodeDictionary):
                                 result.insert(i + 1, stall)
                                 result.insert(i + 2, stall)
                                 result.insert(i + 3, stall)
+                                result.insert(i + 4, stall)
+                                result.insert(i + 5, stall)
 
                     # data instruction
                     else:
@@ -204,6 +210,8 @@ def stallInsertionCase1(instructionElements, typeDictionary, opcodeDictionary):
                             result.insert(i + 1, stall)
                             result.insert(i + 2, stall)
                             result.insert(i + 3, stall)
+                            result.insert(i + 4, stall)
+                            result.insert(i + 5, stall)
 
                 # data instruction
                 else:
@@ -237,6 +245,8 @@ def stallInsertionCase1(instructionElements, typeDictionary, opcodeDictionary):
                                 result.insert(i + 1, stall)
                                 result.insert(i + 2, stall)
                                 result.insert(i + 3, stall)
+                                result.insert(i + 4, stall)
+                                result.insert(i + 5, stall)
                         
                         # CRG instruction
                         else:
@@ -246,6 +256,8 @@ def stallInsertionCase1(instructionElements, typeDictionary, opcodeDictionary):
                                 result.insert(i + 1, stall)
                                 result.insert(i + 2, stall)
                                 result.insert(i + 3, stall)
+                                result.insert(i + 4, stall)
+                                result.insert(i + 5, stall)
 
                     # data instruction
                     else:
@@ -315,6 +327,8 @@ def stallInsertionCase2(instructionElements, typeDictionary, opcodeDictionary):
                             if(currentDestiny == nextSource1 or currentDestiny == nextSource2):
                                 result.insert(i + 1, stall)
                                 result.insert(i + 2, stall)
+                                result.insert(i + 3, stall)
+                                result.insert(i + 4, stall)
 
                     # memory instruction
                     elif(nextInstructionType == "01"):
@@ -329,6 +343,8 @@ def stallInsertionCase2(instructionElements, typeDictionary, opcodeDictionary):
                             if(currentDestiny == nextSource or currentDestiny == nextDestiny):
                                 result.insert(i + 1, stall)
                                 result.insert(i + 2, stall)
+                                result.insert(i + 3, stall)
+                                result.insert(i + 4, stall)
                         
                         # CRG or CRGV instruction
                         else:
@@ -337,6 +353,8 @@ def stallInsertionCase2(instructionElements, typeDictionary, opcodeDictionary):
                             if(currentDestiny == nextSource):
                                 result.insert(i + 1, stall)
                                 result.insert(i + 2, stall)
+                                result.insert(i + 3, stall)
+                                result.insert(i + 4, stall)
                                         
                     # data instruction
                     else:
@@ -346,6 +364,8 @@ def stallInsertionCase2(instructionElements, typeDictionary, opcodeDictionary):
                         if(currentDestiny == nextSource2 or currentDestiny == nextSource3):
                             result.insert(i + 1, stall)
                             result.insert(i + 2, stall)
+                            result.insert(i + 3, stall)
+                            result.insert(i + 4, stall)
 
                 # data instruction
                 else:
@@ -377,6 +397,8 @@ def stallInsertionCase2(instructionElements, typeDictionary, opcodeDictionary):
                             if(currentDestiny == nextSource or currentDestiny == nextDestiny):
                                 result.insert(i + 1, stall)
                                 result.insert(i + 2, stall)
+                                result.insert(i + 3, stall)
+                                result.insert(i + 4, stall)
                         
                         # CRG or CRGV instruction
                         else:
@@ -385,6 +407,8 @@ def stallInsertionCase2(instructionElements, typeDictionary, opcodeDictionary):
                             if(currentDestiny == nextSource):
                                 result.insert(i + 1, stall)
                                 result.insert(i + 2, stall)
+                                result.insert(i + 3, stall)
+                                result.insert(i + 4, stall)
 
                     # data instruction
                     else:
@@ -452,6 +476,8 @@ def stallInsertionCase3(instructionElements, typeDictionary, opcodeDictionary):
 
                             if(currentDestiny == nextSource1 or currentDestiny == nextSource2):
                                 result.insert(i + 1, stall)
+                                result.insert(i + 2, stall)
+                                result.insert(i + 3, stall)
                     
                     # memory instruction
                     elif(nextInstructionType == "01"):
@@ -465,6 +491,8 @@ def stallInsertionCase3(instructionElements, typeDictionary, opcodeDictionary):
 
                             if(currentDestiny == nextSource or currentDestiny == nextDestiny):
                                 result.insert(i + 1, stall)
+                                result.insert(i + 2, stall)
+                                result.insert(i + 3, stall)
                         
                         # CRG or CRGV instruction
                         else:
@@ -472,6 +500,8 @@ def stallInsertionCase3(instructionElements, typeDictionary, opcodeDictionary):
 
                             if(currentDestiny == nextSource):
                                 result.insert(i + 1, stall)
+                                result.insert(i + 2, stall)
+                                result.insert(i + 3, stall)
 
                     # data instruction
                     else:
@@ -480,6 +510,8 @@ def stallInsertionCase3(instructionElements, typeDictionary, opcodeDictionary):
 
                         if(currentDestiny == nextSource2 or currentDestiny == nextSource3):
                             result.insert(i + 1, stall)
+                            result.insert(i + 2, stall)
+                            result.insert(i + 3, stall)
 
                 # data instruction
                 else:
@@ -509,6 +541,8 @@ def stallInsertionCase3(instructionElements, typeDictionary, opcodeDictionary):
 
                             if(currentDestiny == nextSource or currentDestiny == nextDestiny):
                                 result.insert(i + 1, stall)
+                                result.insert(i + 2, stall)
+                                result.insert(i + 3, stall)
                         
                         # CRG or CRGV instruction
                         else:
@@ -516,6 +550,8 @@ def stallInsertionCase3(instructionElements, typeDictionary, opcodeDictionary):
 
                             if(currentDestiny == nextSource):
                                 result.insert(i + 1, stall)
+                                result.insert(i + 2, stall)
+                                result.insert(i + 3, stall)
 
                     # data instruction
                     else:
