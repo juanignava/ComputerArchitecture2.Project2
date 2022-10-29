@@ -11,7 +11,7 @@ module dmem_rom
     logic [V-1:0] dmem_ROM[0:SIZE-1];
     
     initial begin
-       $readmemh("C:/MySpot/ComputerArchitecture2.Project2/TextFiles/imageData.txt", dmem_ROM);
+       $readmemh("C:\Users\Jose David\Documents\GitKraken\Arqui2\ComputerArchitecture2.Project2\TextFiles\imageData.txt", dmem_ROM);
     end
         
     assign rd = dmem_ROM[address[V-1:0]];

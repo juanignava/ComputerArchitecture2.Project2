@@ -17,7 +17,7 @@ module dmem_ram
     logic[V-1:0] tmp_read;
      
     always @(posedge switchStart)
-        $writememh("C:/MySpot/ComputerArchitecture2.Project2/TextFiles/imageOutput.txt", dmem_RAM);
+        $writememh("C:\Users\Jose David\Documents\GitKraken\Arqui2\ComputerArchitecture2.Project2\TextFiles\imageOutput.txt", dmem_RAM);
 
     // Memory meant to be written.
     always_ff @(*) begin
