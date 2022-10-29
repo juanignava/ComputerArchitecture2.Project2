@@ -222,6 +222,7 @@ simulation/
 ProcesadorVectorial.qsf
 ProcesadorVectorial.qws
 *.sv.bak
+serv_req_info.txt
 
 # Output files
 Images/dog_processed.jpeg
