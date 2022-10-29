@@ -3,9 +3,9 @@ import numpy as np
 import imageio.v2 as imageio
 
 # CONSTANS
-IMAGE_PATH = "Images/dog.jpeg"
-IMAGE_SAVE_PATH = "Images/dog_processed.jpeg"
-FILE_PATH_READ = "TextFiles/readfile.txt"
+IMAGE_PATH = "../Images/dog.jpeg"
+IMAGE_SAVE_PATH = "../Images/dog_processed.jpeg"
+FILE_PATH_READ = "../TextFiles/readfile.txt"
 IMAGE_SIZE_X = 250
 IMAGE_SIZE_Y = 200
 
@@ -14,14 +14,15 @@ IMAGE_SIZE_Y = 200
 """
 Description: function that receives the path of an image and creates a list of all the pixels in RGB
 """
-def read_image(path):
-    array = np.array(imageio.imread(path), dtype='int').tolist()
-    list = []
-    for y in range(IMAGE_SIZE_Y):
-        for x in range(IMAGE_SIZE_X):
-            for pix in range(3):
-                list.append(array[y][x][pix])
-    return list
+def read_image(path: str) -> list:
+    array: np.ndarray = np.array(imageio.imread(path), dtype='int').flatten().tolist()
+    #list: list = []
+
+    #for y in range(IMAGE_SIZE_Y):
+    #    for x in range(IMAGE_SIZE_X):
+    #        for pix in range(3):
+    #            list.append(array[y][x][pix])
+    return array #list
 
 """
 Description: function that receives a list of pixels in RGB and converts them into an image
@@ -218,5 +219,5 @@ def shader(R1, R0, G1, G0, B1, B0, T1, T0, type, list):
 
 # MAIN PROGRAM
 image_list = read_image(IMAGE_PATH)
-image_vertical = shader(0, 1, 0, 0, 0, 0, 1, 0, 1, image_list)
+image_vertical = shader(0, 0, 0, 0, 1, 1, 0, 0, 1, image_list)
 save_image(IMAGE_SAVE_PATH, image_vertical)

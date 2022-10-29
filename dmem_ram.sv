@@ -5,7 +5,7 @@ module dmem_ram(input logic switchStart, clk, we,
     logic [31:0] dmem_RAM[0:149999];
 	 
     always @(switchStart)
-    $writememh("C:/MySpot/ComputerArchitecture2.Project2/TextFiles/imageOutput.txt", dmem_RAM);
+    $writememh("C:/TextFiles/imageOutput.txt", dmem_RAM);
     // synthesis translate_on
 
     // Memory meant to be read.

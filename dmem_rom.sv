@@ -5,7 +5,8 @@ module dmem_rom (input logic [31:0] address,
 	
 	initial
 
-		$readmemh("C:/MySpot/ComputerArchitecture2.Project2/TextFiles/imageData.txt", dmem_ROM);	
+		//$readmemh("C:/MySpot/ComputerArchitecture2.Project2/TextFiles/imageData.txt", dmem_ROM);
+	   $readmemh("C:/TextFiles/imageData.txt", dmem_ROM);	
 		
 	assign rd = dmem_ROM[address[31:0]];
 	

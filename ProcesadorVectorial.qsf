@@ -38,7 +38,7 @@
 
 set_global_assignment -name FAMILY "Cyclone IV GX"
 set_global_assignment -name DEVICE EP4CGX150DF31C7
-set_global_assignment -name TOP_LEVEL_ENTITY memoryAccess_tb
+set_global_assignment -name TOP_LEVEL_ENTITY asip
 set_global_assignment -name ORIGINAL_QUARTUS_VERSION 18.1.0
 set_global_assignment -name PROJECT_CREATION_TIME_DATE "22:40:52  OCTOBER 21, 2022"
 set_global_assignment -name LAST_QUARTUS_VERSION "18.1.0 Lite Edition"
@@ -84,6 +84,7 @@ set_global_assignment -name SYSTEMVERILOG_FILE dmem_rom.sv
 set_global_assignment -name SYSTEMVERILOG_FILE memoryController.sv
 set_global_assignment -name SYSTEMVERILOG_FILE memoryAccess.sv
 set_global_assignment -name SYSTEMVERILOG_FILE memoryAccess_tb.sv
+set_global_assignment -name SYSTEMVERILOG_FILE asip.sv
 set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
 set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
 set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top

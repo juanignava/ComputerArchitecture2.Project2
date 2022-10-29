@@ -1,5 +1,5 @@
 module pc_register_tb();
-	
+
 	logic clk;
 	logic clr;
 	logic load;

@@ -4,10 +4,10 @@
 # R3 -> blue
 # R4 -> trans
 
-SUMI R1, R0, 0
-SUMI R2, R0, 0
-SUMI R3, R0, 0
-SUMI R4, R0, 0
+#SUMI R1, R0, 0
+#SUMI R2, R0, 0
+#SUMI R3, R0, 0
+#SUMI R4, R0, 0
 
 # Define value of R1 -> red, based on the bits of red. Those are located at mem dir 100 500
 # R5 -> Red1
