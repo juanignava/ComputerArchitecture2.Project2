@@ -1,43 +1,48 @@
-module dmem_ram(input logic switchStart, clk, we,
-                input logic [31:0] address, wd,
-                output logic [31:0] rd);
-
-    logic [31:0] dmem_RAM[0:149999];
-	 
-    always @(switchStart)
-    $writememh("C:/TextFiles/imageOutput.txt", dmem_RAM);
-    // synthesis translate_on
-
-    // Memory meant to be read.
-    /*always_ff @(negedge clk)
-        begin
-            if (address >= 'd0 && address <= 'd129599)
-                rd = {31'b0, dmem_RAM[address]};
-            else
-                begin
-                rd = 32'b0;
-                //$writememh("C:/MySpot/ComputerArchitecture2.Project2/TextFiles/imageOutput.txt", dmem_RAM);
-                end
-        end*/
+module dmem_ram
+#(
+    parameter S=32,
+    parameter V=192,
+    parameter SIZE=14
+)
+(
+    input  logic        switchStart,
+    input  logic        clk,
+    input  logic        we,
+    input  logic        VecOp,
+    input  logic[S-1:0] address,
+    output logic[V-1:0] wd,
+    output logic[V-1:0] rd
+);
+    logic[S-1:0] dmem_RAM[0:SIZE-1];
+    logic[V-1:0] tmp_read;
+     
+    always @(posedge switchStart)
+        $writememh("C:/MySpot/ComputerArchitecture2.Project2/TextFiles/imageOutput.txt", dmem_RAM);
 
     // Memory meant to be written.
-    always_ff @(posedge clk)
-        begin
-            if (we) 
-                begin
-                    if (address >= 'd0 && address <= 'd149999)
-                        begin
-                        dmem_RAM[address] <= wd;
-                        //$writememh("C:/MySpot/ComputerArchitecture2.Project2/TextFiles/imageOutput.txt", dmem_RAM);
-                        end
-
-
+    always_ff @(*) begin
+        if (clk == 1'b0) begin
+            if (we) begin
+                //if (address >= 'd0 && address < 'd150000) begin
+                if (VecOp == 1'b0) begin
+                    dmem_RAM[address] <= wd[31:0];
+                end else begin
+                    dmem_RAM[address] <= wd[31:0];
+                    dmem_RAM[address + 1] <= wd[63:32];
+                    dmem_RAM[address + 2] <= wd[95:64];
+                    dmem_RAM[address + 3] <= wd[127:96];
+                    dmem_RAM[address + 4] <= wd[159:128];
+                    dmem_RAM[address + 5] <= wd[191:160];
                 end
+            end
+        end else begin
+            if (VecOp == 1'b0) begin
+                tmp_read <= {160'b0, dmem_RAM[address]};
+            end else begin
+                tmp_read <= {dmem_RAM[address + 5], dmem_RAM[address + 4], dmem_RAM[address + 3], dmem_RAM[address + 2], dmem_RAM[address + 1], dmem_RAM[address]};
+            end
         end
-    assign rd = {31'b0, dmem_RAM[address]};
+    end
 
-
-
-
-
-endmodule
+    assign rd = tmp_read;
+endmodule : dmem_ram

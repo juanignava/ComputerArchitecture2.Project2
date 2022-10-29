@@ -55,7 +55,7 @@ module asip
     logic        MemToReg_mem, MemRead_mem, MemWrite_mem, VectorOp_mem,
                  RegVWrite_mem, RegSWrite_mem;
     logic[3:0]   RR_mem;
-    logic[V-1:0] alu_result_mem, wd_mem;
+    logic[V-1:0] alu_result_mem, wd_mem, ram_data;
 
     // Write back signals
     logic[V-1:0] wd_wb, mem_wb, alu_result_wb;
@@ -66,7 +66,7 @@ module asip
     // Instruction fetch stage
     //---------------------------------------------------------------------------------------------
     // Program counter (32-bits)
-    pc_register #(32) pc(
+    pc_register #(S) pc(
         .clk(clk), 
         .clr(rst),
         .load(1'b1),
@@ -75,20 +75,14 @@ module asip
     );
 
     // Compute next PC (32-bits)
-    adder #(32) addp4(
+    adder #(S) addp4(
         .A(pc_out),
         .B(32'b1),
         .C(pc_plus)
     );
 
-    // Instruction memory (32-bits, 10 instructions in the register)
-    imem #(32, 10) inst_mem(
-        .pc(pc_out),
-        .instruction(instruction)
-    );
-
     // Mux to select the PC (32-bits)
-    mux_2to1 #(32) pc_mux(
+    mux_2to1 #(S) pc_mux(
         // PC counter from execution stage, used to jump
         .A(pc_jump),
         // Next PC
@@ -327,6 +321,18 @@ module asip
     //---------------------------------------------------------------------------------------------
     // Memory stage
     //---------------------------------------------------------------------------------------------
+    // 32-bits scalar, 192-bits vec
+    memoryController #(S, V) (
+        .clk(clk),
+        .we(MemWrite_mem),
+        .VecOp(VectorOp_mem),
+        .switchStart(1'b0),
+        .pc(pc_out),
+        .address(alu_result_mem),
+        .wd(wd_mem),
+        .instruction(instruction),
+        .rd(ram_data)
+    );
 
     //---------------------------------------------------------------------------------------------
     // Memory/Write Back pipeline
@@ -337,7 +343,7 @@ module asip
         .MemToReg_in(MemToReg_mem),
         .RegSWrite_in(RegSWrite_mem),
         .RegVWrite_in(RegVWrite_mem),
-        .mem_in(),
+        .mem_in(ram_data),
         .alu_in(alu_result_mem),
         .RR_in(RR_mem),								
         .MemToReg_out(MemToReg_wb),
