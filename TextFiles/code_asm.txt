@@ -4,18 +4,20 @@
 # R3 -> blue
 # R4 -> trans
 
-#SUMI R1, R0, 0
-#SUMI R2, R0, 0
-#SUMI R3, R0, 0
-#SUMI R4, R0, 0
+SUMI R1, R0, 0
+SUMI R2, R0, 0
+SUMI R3, R0, 0
+SUMI R4, R0, 0
 
 # Define value of R1 -> red, based on the bits of red. Those are located at mem dir 100 500
 # R5 -> Red1
 # R6 -> Red0
 
-SUMI R5, R0, 100500
+SUM R5, R0, 150000
+SUMI R5, R5, 151000
 CRG R5, 0(R5)
-SUMI R6, R0, 100501
+SUM R6, R0, 150000
+SUMI R6, R6, 151001
 CRG R6, 0(R6)
 
 SCD R5, R0, _red1_one
@@ -34,7 +36,8 @@ SUMI R1, R0, 63
 _red_end:
 
 # guardar en memoria
-SUMI R10, R0, 100509
+SUMI R10, R0, 150000
+SUMI R10, R10, 151009
 GRD R1, 0(R10)
 SUMI R10, R10, 3
 GRD R1, 0(R10)
@@ -43,9 +46,11 @@ GRD R1, 0(R10)
 # R5 -> Green1
 # R6 -> Green0
 
-SUMI R5, R0, 100502
+SUMI R5, R0, 150000
+SUMI R5, R5, 151002
 CRG R5, 0(R5)
-SUMI R6, R0, 100503
+SUMI R6, R0, 150000
+SUMI R6, R6, 151003
 CRG R6, 0(R6)
 
 SCD R5, R0, _green1_one
@@ -64,7 +69,8 @@ SUMI R2, R0, 63
 _green_end:
 
 # guardar en memoria
-SUMI R10, R0, 100510
+SUMI R10, R0, 150000
+SUMI R10, R10, 151010
 GRD R2, 0(R10)
 SUMI R10, R10, 3
 GRD R2, 0(R10)
@@ -73,9 +79,11 @@ GRD R2, 0(R10)
 # R5 -> Blue1
 # R6 -> Blue0
 
-SUMI R5, R0, 100504
+SUMI R5, R0, 150000
+SUMI R5, R5, 151004
 CRG R5, 0(R5)
-SUMI R6, R0, 100505
+SUMI R6, R0, 150000
+SUMI R6, R6, 151005
 CRG R6, 0(R6)
 
 SCD R5, R0, _blue1_one
@@ -94,7 +102,8 @@ SUMI R3, R0, 63
 _blue_end:
 
 # guardar en memoria
-SUMI R10, R0, 100511
+SUMI R10, R0, 150000
+SUMI R10, R10, 151011
 GRD R3, 0(R10)
 SUMI R10, R10, 3
 GRD R3, 0(R10)
@@ -103,9 +112,11 @@ GRD R3, 0(R10)
 # R5 -> Trans1
 # R6 -> Trans0
 
-SUMI R5, R0, 100506
+SUMI R5, R0, 150000
+SUMI R5, R5, 151006
 CRG R5, 0(R5)
-SUMI R6, R0, 100507
+SUMI R6, R0, 150000
+SUMI R6, R6, 151007
 CRG R6, 0(R6)
 
 SCD R5, R0, _trans1_one
@@ -124,7 +135,8 @@ SUMI R4, R0, 63
 _trans_end:
 
 # Now R5 -> type, based on the switch value. This is located at mem dir 100508
-SUMI R5, R0, 100508
+SUMI R5, R0, 150000
+SUMI R5, R5, 151008
 CRG R5, 0(R5)
 
 # Define the filter to apply
@@ -138,9 +150,9 @@ _vert_fil:
 # R6 -> green_step = green // IMAGE_SIZE_Y
 # R7 -> blue_step = blue // IMAGE_SIZE_Y
 
-DIVI R5, R1, 200
-DIVI R6, R2, 200
-DIVI R7, R3, 200
+SUMI R5, R0, 1
+SUMI R6, R0, 1
+SUMI R7, R0, 1
 
 # External for to iterate the image row
 # R8 will keep the row iterable register
@@ -163,11 +175,12 @@ MULI R10, R8, 250
 MULI R10, R10, 3
 MULI R11, R9, 3
 SUM R12, R10, R11
-SUM R10, R12, 500
+SUM R10, R12, 1000
 CRGV RV1, 0(R10)
 
 # Carga el registro vectorial RV2 con valores de color
-SUMI R10, R0, 100509
+SUMI R10, R0, 150000
+SUMI R10, R10, 151009
 CRGV RV2, 0(R10)
 
 MULEV RV2, RV2, R4
@@ -182,7 +195,7 @@ DIVEV RV1, RV1, R10
 
 SUMV RV3, RV1, RV2
 
-SUM R10, R12, 50500
+SUM R10, R12, 151000
 GRDV RV3, 0(R10)
 
 # Carga el registro de los colores
@@ -195,21 +208,24 @@ _end_vert_loop_columns:
 #    with the values of red_step (R5), green_step (R6) and blue_step (R7)
 RES R1, R1, R5
 # guardar en memoria
-SUMI R10, R0, 100509
+SUMI R10, R0, 150000
+SUMI R10, R10, 151009
 GRD R1, 0(R10)
 SUMI R10, R10, 3
 GRD R1, 0(R10)
 
 RES R2, R2, R6
 # guardar en memoria
-SUMI R10, R0, 100510
+SUMI R10, R0, 150000
+SUMI R10, R10, 151010
 GRD R2, 0(R10)
 SUMI R10, R10, 3
 GRD R2, 0(R10)
 
 RES R3, R3, R7
 # guardar en memoria
-SUMI R10, R0, 100511
+SUMI R10, R0, 150000
+SUMI R10, R10, 151011
 GRD R3, 0(R10)
 SUMI R10, R10, 3
 GRD R3, 0(R10)
