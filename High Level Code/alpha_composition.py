@@ -3,11 +3,11 @@ import numpy as np
 import imageio.v2 as imageio
 
 # CONSTANS
-IMAGE_PATH = "../Images/dog.jpeg"
-IMAGE_SAVE_PATH = "../Images/dog_processed.jpeg"
+IMAGE_PATH = "ComputerArchitecture2.Project2/Images/dog.jpeg"
+IMAGE_SAVE_PATH = "ComputerArchitecture2.Project2/Images/dog_processed.jpeg"
 FILE_PATH_READ = "../TextFiles/readfile.txt"
-IMAGE_SIZE_X = 250
-IMAGE_SIZE_Y = 200
+IMAGE_SIZE_X = 100
+IMAGE_SIZE_Y = 100
 
 # AUXILIAR IMAGE FUNTIONS
 
@@ -135,27 +135,27 @@ def shader(R1, R0, G1, G0, B1, B0, T1, T0, type, list):
         blue_p = 0
         up = 1
 
-        red_step = 2
-        green_step = 2
-        blue_step = 2
+        red_step = 1
+        green_step = 1
+        blue_step = 1
 
         for y in range(IMAGE_SIZE_Y):
             if (y >= IMAGE_SIZE_Y/2):
                 up = 0
             if (up):
                 if (red_p < red):
-                    red_p += red_step
+                    red_p += 2*red_step
                 if (green_p < green):
-                    green_p += green_step
+                    green_p += 2*green_step
                 if (blue_p < blue):
-                    blue_p += blue_step
+                    blue_p += 2*blue_step
             else:
                 if (red_p > 0):
-                    red_p -= red_step
+                    red_p -= 2*red_step
                 if (green_p > 0):
-                    green_p -= green_step
+                    green_p -= 2*green_step
                 if (blue_p > 0):
-                    blue_p -= blue_step
+                    blue_p -= 2*blue_step
             
             for x in range(0, IMAGE_SIZE_X, 2):
                 elem = y * IMAGE_SIZE_X * 3 + x * 3 
@@ -207,17 +207,17 @@ def shader(R1, R0, G1, G0, B1, B0, T1, T0, type, list):
 
                 result += reg_list_res
 
-            if (red > 0):
-                red -= red_step
-            if (green > 0):
-                green -= green_step
-            if (blue > 0):
-                blue -= blue_step
+            if (red > 2):
+                red -= 2*red_step
+            if (green > 2):
+                green -= 2*green_step
+            if (blue > 2):
+                blue -= 2*blue_step
 
         return result
 
 
 # MAIN PROGRAM
 image_list = read_image(IMAGE_PATH)
-image_vertical = shader(0, 0, 0, 0, 1, 1, 0, 0, 1, image_list)
+image_vertical = shader(1, 0, 0, 1, 1, 1, 1, 0, 0, image_list)
 save_image(IMAGE_SAVE_PATH, image_vertical)
