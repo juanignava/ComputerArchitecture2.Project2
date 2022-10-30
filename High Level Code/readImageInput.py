@@ -1,4 +1,5 @@
 # IMPORTS
+from ast import Return
 import numpy as np
 #import imageio
 import imageio.v2 as imageio
@@ -6,8 +7,6 @@ import imageio.v2 as imageio
 # CONSTANS
 IMAGE_PATH = "Images/dog.jpeg"
 IMAGE_SAVE_PATH = "TextFiles/inputPixels.txt"
-IMAGE_SIZE_X = 250
-IMAGE_SIZE_Y = 200
 
 # AUXILIAR IMAGE FUNTIONS
 
@@ -15,30 +14,16 @@ IMAGE_SIZE_Y = 200
 Description: function that receives the path of an image and creates a list of all the pixels in RGB
 """
 def readImage(path):
-
-    array = np.array(imageio.imread(path), dtype='int').tolist()
-    list = []
-
-    for y in range(IMAGE_SIZE_Y):
-
-        for x in range(IMAGE_SIZE_X):
-
-            for pix in range(3):
-
-                list.append(array[y][x][pix])
-
-    return list
+    return np.array(imageio.imread(path), dtype='int').flatten().tolist()
 
 """
 Description: function that receives a list of pixels in RGB and converts them into hex representation
 """
 def decimalToHex(list):
-
     size = len(list)
 
     for i in range(size):
-
-        list[i] = hex(list[i])
+        list[i] = hex(list[i])[2:]
 
     return list
 
