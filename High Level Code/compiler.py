@@ -1,4 +1,7 @@
 # binary => string
+from re import I
+
+
 def twoComplement(binary):
 
     aux = ""
@@ -178,7 +181,7 @@ def stallInsertionCase1(instructionElements, typeDictionary, opcodeDictionary):
 
                         print("Next mem instruction is: " + nextIns)
                         
-                        # GDR and GDRV instructions
+                        # GRD and GRDV instructions
                         if(nextIns == "00"):
                             nextSource = nextInstructionElements[1]
                             nextDestiny = nextInstructionElements[3]
@@ -573,7 +576,7 @@ def riskControlUnit(instructionElements, typeDictionary, opcodeDictionary):
     case0 = stallInsertionCase0(instructionElements, typeDictionary)
     case1 = stallInsertionCase1(case0, typeDictionary, opcodeDictionary)
     case2 = stallInsertionCase2(case1, typeDictionary, opcodeDictionary)
-    case3 = stallInsertionCase3(case2, typeDictionary, opcodeDictionary)    
+    case3 = stallInsertionCase3(case2, typeDictionary, opcodeDictionary)
 
     return case3
 
@@ -588,68 +591,63 @@ def getInstructionElements(filename):
 
     # loop to iterate the code file line by line
     for line in codeLines:
-        
-        # variable to know if the current instruction is a memory one (type 01)
-        memoryFlag = 0   
-        elements = []
-        temp = ""
+        if line != '\n' and line[0] != '#':
+            # variable to know if the current instruction is a memory one (type 01)
+            memoryFlag = 0   
+            elements = []
+            temp = ""
 
-        # slicing the current line to get the last element
-        aux = line[-2]
+            # slicing the current line to get the last element
+            aux = line[-2]
 
-        # current line contains a label
-        if(aux == ":"):
-            instructionElements.append([line[:-2]])
+            # current line contains a label
+            if(aux == ":"):
+                instructionElements.append([line[:-2]])
 
-        # current line contains an instruction
-        else:
+            # current line contains an instruction
+            else:
 
-            #pointerLine += 1
+                #pointerLine += 1
 
-            # loop to iterate the current line char by char
-            for char in line:
+                # loop to iterate the current line char by char
+                for char in line:
 
-                if(char == " " or char == "," or char == "(" or char == ")"):
+                    if(char == " " or char == "," or char == "(" or char == ")"):
 
-                    # check if the current instruction is a memory one to change the flag
-                    if(char == "("):
-                        memoryFlag = 1
+                        # check if the current instruction is a memory one to change the flag
+                        if(char == "("):
+                            memoryFlag = 1
 
-                    if(temp != ""):
-                        elements.append(temp)
+                        if(temp != ""):
+                            elements.append(temp)
 
-                    temp = ""            
+                        temp = ""            
 
-                else:
-                    temp += char
+                    else:
+                        temp += char
 
-            # slice \n from the last element
-            temp = temp[:-1]
-            elements.append(temp)    
-            
-            # remove last element if the current instruction is a memory one
-            if(memoryFlag == 1):
-                elements.pop()
+                # slice \n from the last element
+                temp = temp[:-1]
+                elements.append(temp)    
+                
+                # remove last element if the current instruction is a memory one
+                if(memoryFlag == 1):
+                    elements.pop()
 
-            instructionElements.append(elements)
-            
+                instructionElements.append(elements)
+
     return instructionElements
 
 # instructionElements => string list list
 def getLabelDictionary(instructionElements):
-    
     labelDictionary = {}
 
-    # variable to know the number of the current line
-    pointerLine = 0
-
-    for instruction in instructionElements:
-        pointerLine += 1
+    for i, instruction in enumerate(instructionElements):
         instructionLength = len(instruction)
 
         # label
         if(instructionLength == 1):
-            labelDictionary[instruction[0]] = pointerLine
+            labelDictionary[instruction[0]] = i
             instructionElements.remove(instruction)
 
     return labelDictionary, instructionElements
@@ -664,6 +662,8 @@ def binaryInstructions(filename, instructionElements, typeDictionary, opcodeDict
     pointerLine = 0
 
     for elements in instructionElements:
+        if '*' in elements:
+            continue
 
         pointerLine += 1
         print("elements = ", elements)        
@@ -713,7 +713,7 @@ def binaryInstructions(filename, instructionElements, typeDictionary, opcodeDict
 
             register2 = registerDictionary[elements[3]]       
        
-            if (elements[0] == "CRGV" or elements[0] == "GDRV"):
+            if (elements[0] == "CRGV" or elements[0] == "GRDV"):
                 fillingMemory = "01"
             else:
                 fillingMemory = "00"
@@ -766,13 +766,14 @@ typeDictionary = {
     "SCD": "00",
     "SI": "00",
 
-    "GDR": "01",
+    "GRD": "01",
     "CRG": "01",
-    "GDRV": "01",
+    "GRDV": "01",
     "CRGV": "01",
 
 
     "SUM": "10",
+    "RES": "10",
     "MULEV": "10",
     "DIVEV": "10",
     "SUMV": "10",
@@ -789,12 +790,13 @@ opcodeDictionary = {
     "SCD": "0100",
     "SI": "0010",
 
-    "GDR": "00",
+    "GRD": "00",
     "CRG": "01",
-    "GDRV": "00",
+    "GRDV": "00",
     "CRGV": "01",
 
     "SUM": "0000",
+    "RES": "0100",
     "MULEV": "0001",
     "DIVEV": "0101",
     "SUMV": "1001",
@@ -834,10 +836,10 @@ registerDictionary = {
     "RV7": "0111",	
 }
 
-instructionElements = getInstructionElements('assemblyCode.txt')
+instructionElements = getInstructionElements('TextFiles/code_asm.txt')
 
 instructionElements = riskControlUnit(instructionElements, typeDictionary, opcodeDictionary)
 
 labelDictionary, instructionElements = getLabelDictionary(instructionElements)
 
-binaryInstructions('binaryCode.txt', instructionElements, typeDictionary, opcodeDictionary, registerDictionary, labelDictionary)
+binaryInstructions('TextFiles/instructions.txt', instructionElements, typeDictionary, opcodeDictionary, registerDictionary, labelDictionary)

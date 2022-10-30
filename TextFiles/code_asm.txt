@@ -119,7 +119,7 @@ SI _trans_end
 _trans1_0_one:
 SUMI R4, R0, 255
 SI _trans_end
-_blue0_one:
+_trans0_one:
 SUMI R4, R0, 63
 _trans_end:
 
@@ -163,7 +163,7 @@ MULI R10, R8, 100
 MULI R10, R10, 3
 MULI R11, R9, 3
 SUM R12, R10, R11
-SUM R10, R12, 1000
+SUMI R10, R12, 1000
 CRGV RV1, 0(R10)
 
 # Carga el registro vectorial RV2 con valores de color
@@ -175,14 +175,14 @@ SUMI R10, R0, 100
 DIVEV RV2, RV2, R10
 
 SUMI R10, R0, 100
-RESI R10, R10, R4
+RES R10, R10, R4
 MULEV RV1, RV1, R10
 SUMI R10, R0, 100
 DIVEV RV1, RV1, R10
 
 SUMV RV3, RV1, RV2
 
-SUM R10, R12, 61000
+SUMI R10, R12, 61000
 GRDV RV3, 0(R10)
 
 # Carga el registro de los colores
@@ -227,8 +227,9 @@ SUMI R8, R8, 1
 SI _vert_loop_rows
 _end_vert_loop_rows:
 
-SI end
+SI _end
 
 # Center filter on image
 _center_fil:
-end:
+SUM R0, R0, R0
+_end:
