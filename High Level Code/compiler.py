@@ -773,6 +773,7 @@ typeDictionary = {
 
 
     "SUM": "10",
+    "RES": "10",
     "MULEV": "10",
     "DIVEV": "10",
     "SUMV": "10",
@@ -795,6 +796,7 @@ opcodeDictionary = {
     "CRGV": "01",
 
     "SUM": "0000",
+    "RES": "0100",
     "MULEV": "0001",
     "DIVEV": "0101",
     "SUMV": "1001",
