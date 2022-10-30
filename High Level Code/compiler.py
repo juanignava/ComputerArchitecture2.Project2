@@ -1,7 +1,4 @@
 # binary => string
-from re import I
-
-
 def twoComplement(binary):
 
     aux = ""
@@ -37,7 +34,9 @@ def signExtension(number, instructionType, opcode, pointerLine):
 
     # control instruction
     if(instructionType == "00"):
-        conditional = opcode[3]
+        conditional = opcode[2]
+        #print("El opCode es: " + str(opcode))
+        #print("El condicional es: " + str(conditional))
 
         # conditional instruction
         if(conditional == "0"):
@@ -576,7 +575,7 @@ def riskControlUnit(instructionElements, typeDictionary, opcodeDictionary):
     case0 = stallInsertionCase0(instructionElements, typeDictionary)
     case1 = stallInsertionCase1(case0, typeDictionary, opcodeDictionary)
     case2 = stallInsertionCase2(case1, typeDictionary, opcodeDictionary)
-    case3 = stallInsertionCase3(case2, typeDictionary, opcodeDictionary)
+    case3 = stallInsertionCase3(case2, typeDictionary, opcodeDictionary)    
 
     return case3
 
@@ -591,63 +590,69 @@ def getInstructionElements(filename):
 
     # loop to iterate the code file line by line
     for line in codeLines:
-        if line != '\n' and line[0] != '#':
-            # variable to know if the current instruction is a memory one (type 01)
-            memoryFlag = 0   
-            elements = []
-            temp = ""
+        
+        # variable to know if the current instruction is a memory one (type 01)
+        memoryFlag = 0   
+        elements = []
+        temp = ""
 
-            # slicing the current line to get the last element
-            aux = line[-2]
+        # slicing the current line to get the last element
 
-            # current line contains a label
-            if(aux == ":"):
-                instructionElements.append([line[:-2]])
+        aux = line[-2]
 
-            # current line contains an instruction
-            else:
+        # current line contains a label
+        if(aux == ":"):
+            instructionElements.append([line[:-2]])
 
-                #pointerLine += 1
+        # current line contains an instruction
+        else:
 
-                # loop to iterate the current line char by char
-                for char in line:
+            #pointerLine += 1
 
-                    if(char == " " or char == "," or char == "(" or char == ")"):
+            # loop to iterate the current line char by char
+            for char in line:
 
-                        # check if the current instruction is a memory one to change the flag
-                        if(char == "("):
-                            memoryFlag = 1
+                if(char == " " or char == "," or char == "(" or char == ")"):
 
-                        if(temp != ""):
-                            elements.append(temp)
+                    # check if the current instruction is a memory one to change the flag
+                    if(char == "("):
+                        memoryFlag = 1
 
-                        temp = ""            
+                    if(temp != ""):
+                        elements.append(temp)
 
-                    else:
-                        temp += char
+                    temp = ""            
 
-                # slice \n from the last element
-                temp = temp[:-1]
-                elements.append(temp)    
-                
-                # remove last element if the current instruction is a memory one
-                if(memoryFlag == 1):
-                    elements.pop()
+                else:
+                    temp += char
 
-                instructionElements.append(elements)
+            # slice \n from the last element
+            temp = temp[:-1]
+            elements.append(temp)    
+            
+            # remove last element if the current instruction is a memory one
+            if(memoryFlag == 1):
+                elements.pop()
 
+            instructionElements.append(elements)
+            
     return instructionElements
 
 # instructionElements => string list list
 def getLabelDictionary(instructionElements):
+    
     labelDictionary = {}
 
-    for i, instruction in enumerate(instructionElements):
+    # variable to know the number of the current line
+    pointerLine = 0
+
+    for instruction in instructionElements:
+        pointerLine += 1
         instructionLength = len(instruction)
 
         # label
         if(instructionLength == 1):
-            labelDictionary[instruction[0]] = i
+            labelDictionary[instruction[0]] = pointerLine
             instructionElements.remove(instruction)
 
     return labelDictionary, instructionElements
@@ -662,11 +667,9 @@ def binaryInstructions(filename, instructionElements, typeDictionary, opcodeDict
     pointerLine = 0
 
     for elements in instructionElements:
-        if '*' in elements:
-            continue
 
         pointerLine += 1
-        print("elements = ", elements)        
+        print("elements = ", elements)
             
         instructionType = typeDictionary[elements[0]]
         opcode = opcodeDictionary[elements[0]]
@@ -840,6 +843,13 @@ instructionElements = getInstructionElements('TextFiles/code_asm.txt')
 
 instructionElements = riskControlUnit(instructionElements, typeDictionary, opcodeDictionary)
 
+#print ("_______")
+#print (instructionElements)
+#print ("_______")
+
 labelDictionary, instructionElements = getLabelDictionary(instructionElements)
+
+instructionElements.pop()
+print(instructionElements)
 
 binaryInstructions('TextFiles/instructions.txt', instructionElements, typeDictionary, opcodeDictionary, registerDictionary, labelDictionary)
