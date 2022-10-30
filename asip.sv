@@ -36,7 +36,7 @@ module asip
     logic[S-1:0] pc_decode;
     logic[1:0]   type_op, func, ALUOp, ALUSrc2;
     logic        imm_type, vec_type, imm_src, JumpI, JumpCI, JumpCD, MemToReg, MemRead, MemWrite,
-                 VectorOp, ALUSrc1, ALUSrc3, RegVWrite, RegSWrite;
+                 VectorOp, ALUSrc1, ALUSrc3, RegVWrite, RegSWrite, loading;
     logic[3:0]   rs1, rs3, rs2;
     logic[25:0]  imm;
     logic[S-1:0] rd1, rd2, rd3, imm_ext;
@@ -165,6 +165,7 @@ module asip
         .MemRead(MemRead),
         .MemWrite(MemWrite),
         .ImmSrc(imm_src),
+        .Loading(loading),
         .VectorOp(VectorOp),
         .ALUSrc1(ALUSrc1),
         .ALUSrc2(ALUSrc2),
@@ -323,13 +324,14 @@ module asip
     //---------------------------------------------------------------------------------------------
     // 32-bits scalar, 192-bits vec, 10 instructions, 30000 for ROM, 30000 for RAM, 5 registers for
     // switches
-    memoryController #(S, V, 1000, 30000, 30000, 15) mem_controller (
+    memoryController #(S, V, 431, 30000, 30000, 15) mem_controller (
         .clk(clk),
         .we(MemWrite_mem),
         .VecOp(VectorOp_mem),
         .switchStart(1'b0),
         .pc(pc_out),
         .address(alu_result_mem[S-1:0]),
+        .loading(loading),
         .switch_regs({
             {30'b0, rgba_switches[0]},
             {30'b0, rgba_switches[1]},

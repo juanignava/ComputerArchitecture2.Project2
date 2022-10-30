@@ -223,6 +223,7 @@ ProcesadorVectorial.qsf
 ProcesadorVectorial.qws
 *.sv.bak
 serv_req_info.txt
+ProcesadorVectorial_assignment_defaults.qdf
 
 # Output files
 Images/dog_processed.jpeg

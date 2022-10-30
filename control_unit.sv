@@ -3,7 +3,7 @@
     input  logic[1:0] instruction_type, func,
     input  logic      rst, imm, vector,
     output logic      JumpI, JumpCI, JumpCD, MemToReg, MemRead, MemWrite, ImmSrc, VectorOp,
-                      ALUSrc1, ALUSrc3, RegVWrite, RegSWrite,
+                      ALUSrc1, ALUSrc3, RegVWrite, RegSWrite, Loading,
     output logic[1:0] ALUOp, ALUSrc2
 );
             
@@ -23,6 +23,7 @@
             VectorOp = 0;
             RegVWrite = 0;
             RegSWrite = 0;
+            Loading = 0;
         end
 
         // Instrucciones de control
@@ -106,6 +107,7 @@
             JumpCI = 0;
             JumpCD = 0;
             JumpI = 0;
+            Loading = func[0];
 
             if (func == 2'b00) begin
                 RegVWrite = 1'b0;
@@ -141,7 +143,15 @@
                 ALUOp = 2'b00;
                 RegSWrite = 1'b1;
                 RegVWrite = 1'b0;
-                VectorOp = 0;
+                VectorOp = 1'b0;
+            end
+            if (func == 2'b01 && vector == 1'b0) begin
+                ALUSrc3 = 1'b0;
+                ALUSrc2 = 2'b01;
+                ALUOp = 2'b01;
+                RegSWrite = 1'b1;
+                RegVWrite = 1'b0;
+                VectorOp = 1'b0;
             end
             if (func == 2'b00 && vector == 1'b1) begin
                 ALUSrc3 = 1'b1;

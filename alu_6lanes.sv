@@ -11,14 +11,13 @@ module alu_6lanes
     output        flagZ
 );
     reg [V-1:0] alu_out_temp = 'd0;
-
     reg [S-1:0] C0, C1, C2, C3, C4, C5;
 
     logic flagZ_aux = 1'b0;
 
     always @(*) begin
         case (op)
-            // case operación escalar
+            // case operacion escalar
             1'b0:			
                 case (sel)
                     // case suma
@@ -34,7 +33,7 @@ module alu_6lanes
                     2'b10: begin
                         alu_out_temp = A[S-1:0] * B[S-1:0];
                     end
-                    // case división
+                    // case division
                     2'b11: begin
                         alu_out_temp = A[S-1:0] / B[S-1:0];
                     end
@@ -42,10 +41,10 @@ module alu_6lanes
                         alu_out_temp = A[S-1:0] + B[S-1:0];
                     end
                 endcase
-            // case operación vectorial
+            // case operacion vectorial
             1'b1:
                 case (sel)
-                    // case multiplicación escalar vector
+                    // case multiplicacion escalar vector
                     2'b00: begin
                         C0 = A[S-1:0] * B[S-1:0];
                         C1 = A[2*S-1:S] * B[S-1:0];
@@ -53,10 +52,10 @@ module alu_6lanes
                         C3 = A[4*S-1:3*S] * B[S-1:0];
                         C4 = A[5*S-1:4*S] * B[S-1:0];
                         C5 = A[6*S-1:5*S] * B[S-1:0];
-                        
+
                         alu_out_temp = {C5, C4, C3, C2, C1, C0};
                     end
-                    // case división escalar vector
+                    // case division escalar vector
                     2'b01: begin
                         C0 = A[S-1:0] / B[S-1:0];
                         C1 = A[2*S-1:S] / B[S-1:0];
