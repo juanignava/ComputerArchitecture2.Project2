@@ -1,4 +1,5 @@
 _valores-iniciales:
+RES R2, R1, R1
 SUM R7, R1, R3
 SUM R7, R0, R0
 DIVI R3, R7, 360
