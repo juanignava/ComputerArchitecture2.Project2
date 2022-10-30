@@ -321,14 +321,32 @@ module asip
     //---------------------------------------------------------------------------------------------
     // Memory stage
     //---------------------------------------------------------------------------------------------
-    // 32-bits scalar, 192-bits vec
-    memoryController #(S, V) (
+    // 32-bits scalar, 192-bits vec, 10 instructions, 30000 for ROM, 30000 for RAM, 5 registers for
+    // switches
+    memoryController #(S, V, 1000, 30000, 30000, 15) mem_controller (
         .clk(clk),
         .we(MemWrite_mem),
         .VecOp(VectorOp_mem),
         .switchStart(1'b0),
         .pc(pc_out),
-        .address(alu_result_mem),
+        .address(alu_result_mem[S-1:0]),
+        .switch_regs({
+            {30'b0, rgba_switches[0]},
+            {30'b0, rgba_switches[1]},
+            {30'b0, rgba_switches[2]},
+            {30'b0, rgba_switches[3]},
+            {30'b0, rgba_switches[4]},
+            {30'b0, rgba_switches[5]},
+            {30'b0, rgba_switches[6]},
+            {30'b0, rgba_switches[7]},
+            {30'b0, gtype_switch},
+            R,
+            G,
+            B,
+            R,
+            G,
+            B
+        }),
         .wd(wd_mem),
         .instruction(instruction),
         .rd(ram_data)
@@ -402,22 +420,22 @@ module asip
     );
 
     // Mux transparency/alpha (32-bits, 32-bits)
-    mux_4to1 #(S, S) trans_mux(
-        .A(VALUE1),
-        .B(VALUE2),
-        .C(VALUE3),
-        .D(VALUE0),
-        // Transparency/alpha switches
-        .sel(rgba_switches[1:0]),
-        .E(A)
-    );
+    //mux_4to1 #(S, S) trans_mux(
+    //    .A(VALUE1),
+    //    .B(VALUE2),
+    //    .C(VALUE3),
+    //    .D(VALUE0),
+    //    // Transparency/alpha switches
+    //    .sel(rgba_switches[1:0]),
+    //    .E(A)
+    //);
 
     // Mux gradient selector (32-bits)
-    mux_2to1 #(S) gsel_mux(
-        .A(TYPE1),
-        .B(TYPE2),
-        // Gradient selector
-        .sel(gtype_switch),
-        .C(gtype)
-    );
+    //mux_2to1 #(S) gsel_mux(
+    //    .A(TYPE1),
+    //    .B(TYPE2),
+    //    // Gradient selector
+    //    .sel(gtype_switch),
+    //    .C(gtype)
+    //);
 endmodule : asip
