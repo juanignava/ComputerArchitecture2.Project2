@@ -13,7 +13,7 @@ module imem
 
     initial begin
         // Instructions memory
-        $readmemh("C:/MySpot/ComputerArchitecture2.Project2/TextFiles/instructions.txt", imem_ROM);
+        $readmemh("C:\Users\Jose David\Documents\GitKraken\Arqui2\ComputerArchitecture2.Project2\TextFiles\instructions.txt", imem_ROM);
     end
 
     assign instruction = imem_ROM[pc[N-1:0]];
