@@ -2,7 +2,7 @@ module dmem_ram
 #(
     parameter S=32,
 	 parameter V=192,
-    parameter SIZE=30000
+    parameter SIZE=30015
 )
 (
 	 input  logic			isVector,
@@ -13,8 +13,10 @@ module dmem_ram
     input  logic[V-1:0] wd,
     output logic[V-1:0] rd
 );
-    logic[S-1:0] dmem_RAM[0:SIZE-1];
+    logic[S-1:0] dmem_RAM[0:SIZE-1] = '{SIZE{32'd0}};
 	 //logic[S-1:0] rdTemp0, rdTemp1, rdTemp2, rdTemp3, rdTemp4, rdTemp5;
+	 
+	  
 
     always @(posedge switchStart)
         $writememb("C:/Users/juan navarro/Documents/Implementaciones Arqui 2/ComputerArchitecture2.Project2/imageOutput.txt", dmem_RAM);
@@ -42,7 +44,7 @@ module dmem_ram
 
 
     // Memory meant to be written.
-    always @(posedge clk) begin
+    always_ff @(posedge clk) begin
         if (we) begin
 				if (isVector == 1) begin
 					dmem_RAM[address] <= wd[S-1:0];
@@ -60,5 +62,5 @@ module dmem_ram
         end
     end
 
-    assign rd = 0;//{rdTemp5, rdTemp4, rdTemp3, rdTemp2, rdTemp1, rdTemp0};
+    assign rd = 0;//{{V-S{1'd0}}, dmem_RAM[address[S-1:0]]};//{rdTemp5, rdTemp4, rdTemp3, rdTemp2, rdTemp1, rdTemp0};
 endmodule : dmem_ram
