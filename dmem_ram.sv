@@ -44,7 +44,7 @@ module dmem_ram
 
 
     // Memory meant to be written.
-    always_ff @(posedge clk) begin
+    always_ff @(negedge clk) begin
         if (we) begin
 				if (isVector == 1) begin
 					dmem_RAM[address] <= wd[S-1:0];
