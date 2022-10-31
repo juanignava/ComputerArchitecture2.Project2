@@ -6,7 +6,7 @@ import imageio.v2 as imageio
 
 # CONSTANS
 IMAGE_PATH = "Images/dog.jpeg"
-IMAGE_SAVE_PATH = "TextFiles/inputPixels.txt"
+IMAGE_SAVE_PATH = "imageData.txt"
 
 # AUXILIAR IMAGE FUNTIONS
 
@@ -23,7 +23,11 @@ def decimalToHex(list):
     size = len(list)
 
     for i in range(size):
-        list[i] = hex(list[i])[2:]
+        elem = str(bin(list[i])[2:])
+        complete = 32 - len(elem)
+        for j in range(complete):
+            elem = '0' + elem
+        list[i] = elem
 
     return list
 
