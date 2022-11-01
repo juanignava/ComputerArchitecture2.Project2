@@ -21,15 +21,19 @@ module VGA_test(input  logic clk, reset,
 			// calculate the address
 			if (y < 100 && x < 100) begin
 				address = y * 300 + x*3;
-				prev_address = address; 
+				prev_address = address;
+				r_siguiente = data[7:0];
+				g_siguiente = data[39:32];
+				b_siguiente = data[71:64];
 			end
 			else begin
 				address = prev_address;
+				r_siguiente = 8'd0;
+				g_siguiente = 8'd0;
+				b_siguiente = 8'd0;
 			end
 				
-			r_siguiente = data[7:0];
-			g_siguiente = data[39:32];
-			b_siguiente = data[71:64];
+			
 				
 		end
 	
