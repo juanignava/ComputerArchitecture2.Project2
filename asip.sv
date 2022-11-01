@@ -41,7 +41,7 @@ module asip
 	 logic[S-1:0]	imm_decode;
 	 
 	 logic[1:0] 	AluOp_decode, AluSrc3_decode;
-	 logic			JumpI_decode, JumpCI_decode, JumpCD_decode, MemToReg_decode, MemWrite_decode, VectorOp_decode, AluSrc1_decode, AluSrc2_decode, RegVWrite_Decode, RegSWrite_decode, ImmSrc_decode;	
+	 logic			JumpI_decode, JumpCI_decode, JumpCD_decode, MemToReg_decode, MemWrite_decode, VectorOp_decode, AluSrc1_decode, AluSrc2_decode, RegVWrite_decode, RegSWrite_decode, ImmSrc_decode;	
     
 
     // Execution signals
@@ -194,7 +194,7 @@ module asip
 			 .VectorOp(VectorOp_decode),
 			 .ALUSrc1(AluSrc1_decode), 
 			 .ALUSrc3(AluSrc3_decode), 
-			 .RegVWrite(RegVWrite_Decode), 
+			 .RegVWrite(RegVWrite_decode), 
 			 .RegSWrite(RegSWrite_decode),
 			 .ALUOp(AluOp_decode), 
 			 .ALUSrc2(AluSrc2_decode)
@@ -203,7 +203,53 @@ module asip
     //---------------------------------------------------------------------------------------------
     // Instruction Decode/Execution pipeline
     //---------------------------------------------------------------------------------------------
-     
+	 
+		segment_id_ex id_ex(
+			 .clk(clk),
+			 .rst(rst),
+			 .JumpI_in(JumpI_decode),
+			 .JumpCI_in(JumpCI_decode),
+			 .JumpCD_in(JumpCD_decode),
+			 .MemToReg_in(MemToReg_decode),
+			 .MemWrite_in(MemWrite_decode),
+			 .ALUOp_in(AluOp_decode),
+			 .VectorOp_in(VectorOp_decode),
+			 .ALUSrc1_in(AluSrc1_decode),
+			 .ALUSrc2_in(AluSrc2_decode),
+			 .ALUSrc3_in(AluSrc3_decode),
+			 .pc_in(pc_decode),
+			 .RSS2_in(RSS2_decode),
+			 .RSS3_in(RSS3_decode),
+			 .RSS1_in(RSS1_decode),
+			 .RVS2_in(RSV2_decode),
+			 .RVS3_in(RSV3_decode),
+			 .RVS1_in(RSV1_decode),
+			 .RD_in(regSrc1),
+			 .num_in(imm_decode),
+			 .RegSWrite_in(RegSWrite_decode), 
+			 .RegVWrite_in(RegVWrite_decode), 
+			 .JumpI_out(JumpI_ex),
+			 .JumpCI_out(JumpCI_ex),
+			 .JumpCD_out(JumpCD_ex),
+			 .MemToReg_out(MemToReg_ex),
+			 .MemWrite_out(MemWrite_ex),
+			 .ALUOp_out(AluOp_ex),
+			 .VectorOp_out(VectorOp_ex),
+			 .ALUSrc1_out(AluSrc1_ex),
+			 .ALUSrc2_out(AluSrc2_ex),
+			 .ALUSrc3_out(AluSrc3_ex),
+			 .pc_out(pc_ex),
+			 .RSS2_out(RSS2_ex),
+			 .RSS3_out(RSS3_ex),
+			 .RSS1_out(RSS1_ex),
+			 .RVS2_out(RSV2_ex),
+			 .RVS3_out(RSV3_ex),
+			 .RVS1_out(RSV1_ex),
+			 .RD_out(RD_ex),
+			 .num_out(imm_ex),
+			 .RegSWrite_out(RegSWrite_ex),
+			 .RegVWrite_out(RegVWrite_ex)
+		);
 
     //---------------------------------------------------------------------------------------------
     // Execution stage
