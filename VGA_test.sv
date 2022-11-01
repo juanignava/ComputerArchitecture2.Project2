@@ -19,8 +19,8 @@ module VGA_test(input  logic clk, reset,
 	always_ff @(posedge n25MHZCLK)
 		begin
 			// calculate the address
-			if (y < 100 && x < 300 && x%3 == 0) begin
-				address = y * 100 + x;
+			if (y < 100 && x < 100) begin
+				address = y * 300 + x*3;
 				prev_address = address; 
 			end
 			else begin
