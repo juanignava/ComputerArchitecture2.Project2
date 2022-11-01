@@ -51,7 +51,7 @@
                 JumpCD = 0;
                 JumpI = 1;
                 ImmSrc = 0;
-                ALUSrc3 = 2'b10;
+                ALUSrc3 = 2'b00;
             end
 
             // Salto con condicion desigual
@@ -97,11 +97,11 @@
 				ALUSrc2 = 1'b0;
 				ALUSrc1 = 1'b1;
             RegSWrite = 1'b0;
-            ALUSrc1 = 1'b1;
             VectorOp = 1'b1;
             JumpCI = 0;
             JumpCD = 0;
             JumpI = 0;
+				ALUOp = 2'b00;
 
             if (func == 2'b00) begin
                 RegVWrite = 1'b0;
@@ -144,6 +144,7 @@
             end
             if (func == 2'b00 && vector == 1'b1) begin
                 ALUSrc2 = 1'b1;
+					 ALUOp = 2'b00;
                 RegSWrite = 1'b0;
                 RegVWrite = 1'b1;
                 VectorOp = 1'b1;
@@ -151,6 +152,7 @@
             end
             if (func == 2'b01 && vector == 1'b1) begin
                 ALUSrc2 = 1'b1;
+					 ALUOp = 2'b01;
                 RegSWrite = 1'b0;
                 RegVWrite = 1'b1;
                 VectorOp = 1'b1;
@@ -158,6 +160,7 @@
             end
             if(func == 2'b10 && vector == 1'b1) begin
                 ALUSrc2 = 1'b1;
+					 ALUOp = 2'b10;
                 RegSWrite = 1'b0;
                 RegVWrite = 1'b1;
                 VectorOp = 1'b1;
@@ -168,7 +171,7 @@
         // Instrucciones de datos con inmediato
         if (instruction_type == 2'b10 && imm == 1'b1) begin
             ALUSrc2 = 1'b0;
-            ALUSrc1 = 2'b10;
+            ALUSrc3 = 2'b10;
             MemWrite = 1'b0;
             MemToReg = 1'b0;
             JumpCI = 0;
