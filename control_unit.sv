@@ -125,6 +125,7 @@
             JumpI = 0;
             ImmSrc = 1'b0;
 				ALUSrc3 = 2'b01;
+				ALUSrc1 = 1'b0;
             
             if (func == 2'b00 && vector == 1'b0) begin
                 ALUSrc2 = 1'b0;
@@ -132,7 +133,6 @@
                 RegSWrite = 1'b1;
                 RegVWrite = 1'b0;
                 VectorOp = 1'b0;
-					 ALUSrc1 = 1'b0;
             end
             if (func == 2'b01 && vector == 1'b0) begin
                 ALUSrc2 = 1'b0;
@@ -140,7 +140,6 @@
                 RegSWrite = 1'b1;
                 RegVWrite = 1'b0;
                 VectorOp = 1'b0;
-					 ALUSrc1 = 1'b0;
             end
             if (func == 2'b00 && vector == 1'b1) begin
                 ALUSrc2 = 1'b1;
@@ -148,7 +147,6 @@
                 RegSWrite = 1'b0;
                 RegVWrite = 1'b1;
                 VectorOp = 1'b1;
-					 ALUSrc1 = 1'b1;
             end
             if (func == 2'b01 && vector == 1'b1) begin
                 ALUSrc2 = 1'b1;
@@ -156,7 +154,6 @@
                 RegSWrite = 1'b0;
                 RegVWrite = 1'b1;
                 VectorOp = 1'b1;
-					 ALUSrc1 = 1'b1;
             end
             if(func == 2'b10 && vector == 1'b1) begin
                 ALUSrc2 = 1'b1;
@@ -164,7 +161,7 @@
                 RegSWrite = 1'b0;
                 RegVWrite = 1'b1;
                 VectorOp = 1'b1;
-					 ALUSrc1 = 1'b1;
+					 
             end
         end
 
