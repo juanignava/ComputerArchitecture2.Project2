@@ -37,6 +37,7 @@ def signExtension(number, instructionType, opcode, pointerLine):
         conditional = opcode[2]
         #print("El opCode es: " + str(opcode))
         #print("El condicional es: " + str(conditional))
+        print("El inmediato es: " + str(immediate))
 
         # conditional instruction
         if(conditional == "0"):
@@ -839,9 +840,9 @@ registerDictionary = {
     "RV7": "0111",	
 }
 
-instructionElements = getInstructionElements('TextFiles/code_asm.txt')
+instructionElements = getInstructionElements('TextFiles/code_asm_raw.txt')
 
-instructionElements = riskControlUnit(instructionElements, typeDictionary, opcodeDictionary)
+#instructionElements = riskControlUnit(instructionElements, typeDictionary, opcodeDictionary)
 
 #print ("_______")
 #print (instructionElements)
@@ -850,6 +851,8 @@ instructionElements = riskControlUnit(instructionElements, typeDictionary, opcod
 labelDictionary, instructionElements = getLabelDictionary(instructionElements)
 
 instructionElements.pop()
-print(instructionElements)
 
 binaryInstructions('TextFiles/instructions.txt', instructionElements, typeDictionary, opcodeDictionary, registerDictionary, labelDictionary)
+
+print("Cantidad del bloques: " + str(len(labelDictionary)))
+print("Cantidad del instrucciones: " + str(len(instructionElements)))
