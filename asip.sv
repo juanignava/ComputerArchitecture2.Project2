@@ -314,8 +314,27 @@ module asip
     //---------------------------------------------------------------------------------------------
     // Execution/Memory pipeline
     //---------------------------------------------------------------------------------------------
-   
-   
+		
+		segment_ex_mem ex_mem(
+			 .clk(clk),
+			 .rst(rst),
+			 .MemToReg_in(MemToReg_ex),
+			 .MemWrite_in(MemWrite_ex),
+			 .VectorOp_in(VectorOp_ex),
+			 .RegSWrite_in(RegSWrite_ex),
+			 .RegVWrite_in(RegVWrite_ex),
+			 .alu_in(aluResult_ex),
+			 .mux1_in(mux_result1),
+			 .RD_in(RD_ex),
+			 .MemToReg_out(MemToReg_mem),
+			 .MemWrite_out(MemWrite_mem),
+			 .VectorOp_out(VectorOp_mem),
+			 .RegSWrite_out(RegSWrite_mem),
+			 .RegVWrite_out(RegVWrite_mem),
+			 .alu_out(aluResult_mem),
+			 .mux1_out(wd_mem),
+			 .RD_out(RD_mem)
+		);
 
     //---------------------------------------------------------------------------------------------
     // Memory stage
@@ -327,7 +346,23 @@ module asip
     //---------------------------------------------------------------------------------------------
     // Memory/Write Back pipeline
     //---------------------------------------------------------------------------------------------
-   
+	 
+		 segment_mem_wb mem_wb(
+			 .clk(clk),
+			 .rst(rst),
+			 .MemToReg_in(MemToReg_mem),
+			 .RegSWrite_in(RegSWrite_mem),
+			 .RegVWrite_in(RegVWrite_mem),
+			 .mem_in(data_mem),
+			 .alu_in(aluResult_mem),
+			 .RD_in(RD_mem),								
+			 .MemToReg_out(MemToReg_wb),
+			 .RegSWrite_out(RegSWrite_wb),
+			 .RegVWrite_out(RegVWrite_wb),
+			 .mem_out(data_wb),
+			 .alu_out(aluResult_wb),
+			 .RD_out(RD_wb)
+		);
 
     //---------------------------------------------------------------------------------------------
     // Write back stage

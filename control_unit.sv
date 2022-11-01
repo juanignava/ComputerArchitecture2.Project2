@@ -97,24 +97,25 @@
             ImmSrc = 1'b1;
             ALUSrc3 = 2'b10;
 				ALUSrc2 = 1'b0;
-				ALUSrc1 = 1'b1;
             RegSWrite = 1'b0;
             VectorOp = 1'b1;
             JumpCI = 0;
             JumpCD = 0;
             JumpI = 0;
-				ALUOp = 2'b00;
+				ALUOp = 2'b10;
 
             if (func == 2'b00) begin
                 RegVWrite = 1'b0;
                 MemWrite = 1'b1;
                 MemToReg = 1'b0;
+					 ALUSrc1 = 1'b1;
             end
                     
             if (func == 2'b01) begin
                 RegVWrite = 1'b1;
                 MemWrite = 1'b0;
                 MemToReg = 1'b1;
+					 ALUSrc1 = 1'b0;
             end
         end
         
