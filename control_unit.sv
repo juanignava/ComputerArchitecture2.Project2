@@ -33,7 +33,7 @@
             RegVWrite = 0;
             RegSWrite = 0;
             ALUSrc1 = 1'b0;
-				ALUSrc3 = 1'b0;
+				ALUSrc2 = 1'b0;
                 
             // Salto con condicion igual
             if (func == 2'b00 && imm == 1'b0) begin
@@ -41,7 +41,7 @@
                 JumpCD = 0;
                 JumpI = 0;
                 ImmSrc = 1; 
-                ALUSrc2 = 2'b11;
+                ALUSrc3 = 2'b11;
                 
             end
 
@@ -51,7 +51,7 @@
                 JumpCD = 0;
                 JumpI = 1;
                 ImmSrc = 0;
-                ALUSrc2 = 2'b10;
+                ALUSrc3 = 2'b10;
             end
 
             // Salto con condicion desigual
@@ -60,15 +60,15 @@
                 JumpCD = 1;
                 JumpI = 0;
                 ImmSrc = 1;
-                ALUSrc2 = 2'b11;
+                ALUSrc3 = 2'b11;
             end 
         end
         
         // Instrucciones de memoria escalares
         if (instruction_type == 2'b01 && vector == 1'b0) begin
             ImmSrc = 1'b1;
-            ALUSrc2 = 2'b10;
-            ALUSrc3 = 1'b0;
+            ALUSrc3 = 2'b10;
+            ALUSrc2 = 1'b0;
             RegVWrite = 1'b0;
             ALUSrc1 = 1'b0;
             VectorOp = 1'b0;
@@ -93,8 +93,8 @@
         // Instrucciones de memoria vectoriales
         if (instruction_type == 2'b01 && vector == 1'b1) begin
             ImmSrc = 1'b1;
-            ALUSrc2 = 2'b10;
-				ALUSrc3 = 1'b0;
+            ALUSrc3 = 2'b10;
+				ALUSrc2 = 1'b0;
 				ALUSrc1 = 1'b1;
             RegSWrite = 1'b0;
             ALUSrc1 = 1'b1;
@@ -124,10 +124,10 @@
             JumpCD = 0;
             JumpI = 0;
             ImmSrc = 1'b0;
-				ALUSrc2 = 2'b01;
+				ALUSrc3 = 2'b01;
             
             if (func == 2'b00 && vector == 1'b0) begin
-                ALUSrc3 = 1'b0;
+                ALUSrc2 = 1'b0;
                 ALUOp = 2'b00;
                 RegSWrite = 1'b1;
                 RegVWrite = 1'b0;
@@ -135,7 +135,7 @@
 					 ALUSrc1 = 1'b0;
             end
             if (func == 2'b01 && vector == 1'b0) begin
-                ALUSrc3 = 1'b0;
+                ALUSrc2 = 1'b0;
                 ALUOp = 2'b01;
                 RegSWrite = 1'b1;
                 RegVWrite = 1'b0;
@@ -143,21 +143,21 @@
 					 ALUSrc1 = 1'b0;
             end
             if (func == 2'b00 && vector == 1'b1) begin
-                ALUSrc3 = 1'b1;
+                ALUSrc2 = 1'b1;
                 RegSWrite = 1'b0;
                 RegVWrite = 1'b1;
                 VectorOp = 1'b1;
 					 ALUSrc1 = 1'b1;
             end
             if (func == 2'b01 && vector == 1'b1) begin
-                ALUSrc3 = 1'b1;
+                ALUSrc2 = 1'b1;
                 RegSWrite = 1'b0;
                 RegVWrite = 1'b1;
                 VectorOp = 1'b1;
 					 ALUSrc1 = 1'b1;
             end
             if(func == 2'b10 && vector == 1'b1) begin
-                ALUSrc3 = 1'b1;
+                ALUSrc2 = 1'b1;
                 RegSWrite = 1'b0;
                 RegVWrite = 1'b1;
                 VectorOp = 1'b1;
@@ -167,8 +167,8 @@
 
         // Instrucciones de datos con inmediato
         if (instruction_type == 2'b10 && imm == 1'b1) begin
-            ALUSrc3 = 1'b0;
-            ALUSrc2 = 2'b10;
+            ALUSrc2 = 1'b0;
+            ALUSrc1 = 2'b10;
             MemWrite = 1'b0;
             MemToReg = 1'b0;
             JumpCI = 0;
