@@ -13,8 +13,8 @@ module dmem_rom
     logic[S-1:0] rdTemp0, rdTemp1, rdTemp2, rdTemp3, rdTemp4, rdTemp5;
     
     initial
-       //$readmemb("C:/Users/juan navarro/Documents/Implementaciones Arqui 2/ComputerArchitecture2.Project2/imageData.txt", dmem_ROM);
-		 $readmemb("imageData.txt", dmem_ROM, 0, SIZE-1);
+       $readmemb("C:/Users/juan navarro/Documents/Implementaciones Arqui 2/ComputerArchitecture2.Project2/imageData.txt", dmem_ROM);
+		 //$readmemb("imageData.txt", dmem_ROM, 0, SIZE-1);
 
     always_comb begin
         if (isVector == 1) begin
