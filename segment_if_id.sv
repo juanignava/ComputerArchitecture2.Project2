@@ -33,8 +33,8 @@ module segment_if_id
             I = instruction[27];
             V = instruction[26];
             RS1 = instruction[25:22];				
-            RS3 = instruction[21:18];				
-            RS2 = instruction[17:14];				
+            RS3 = instruction[17:14];				
+            RS2 = instruction[21:18];				
             imm = instruction[25:0];
         end
     end

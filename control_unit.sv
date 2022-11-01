@@ -28,7 +28,6 @@
         if (instruction_type == 2'b00) begin
             MemToReg = 0;
             MemWrite = 0;
-            ALUOp = 2'b00;
             VectorOp = 1'b0;
             RegVWrite = 0;
             RegSWrite = 0;
@@ -42,6 +41,7 @@
                 JumpI = 0;
                 ImmSrc = 1; 
                 ALUSrc3 = 2'b11;
+					 ALUOp = 2'b01;
                 
             end
 
@@ -52,6 +52,7 @@
                 JumpI = 1;
                 ImmSrc = 0;
                 ALUSrc3 = 2'b00;
+					 ALUOp = 2'b00;
             end
 
             // Salto con condicion desigual
@@ -61,6 +62,7 @@
                 JumpI = 0;
                 ImmSrc = 1;
                 ALUSrc3 = 2'b11;
+					 ALUOp = 2'b01;
             end 
         end
         

@@ -56,7 +56,7 @@ module asip
 	 
 	 logic[V-1:0]  mux_result2, mux_result3, wd_ex, aluResult_ex;
 	 logic[S-1:0]	pc_jump;
-	 logic 			PCSrc_ex;
+	 logic 			PCSrc_ex, flagZ;
     
 
     // Memory signals
@@ -254,23 +254,62 @@ module asip
     //---------------------------------------------------------------------------------------------
     // Execution stage
     //---------------------------------------------------------------------------------------------
-    // Mux ALU Operand 1 (192-bits)
-    
-
-    // Mux ALU Operand 2 (32-bits, 192-bits)
-   
-
-    // Mux Write Data (32-bits)
-   
+    // Muxes
+	 
+		 mux_2to1 #(S, V, V) AluSrc2_mux(
+			  .A(RSS2_ex), 
+			  .B(RSV2_ex),
+			  .sel(AluSrc2_ex),
+			  .C(mux_result2)
+		 );
+		 
+		 mux_2to1 #(S, V, V) AluSrc1_mux(
+			  .A(RSS1_ex), 
+			  .B(RSV1_ex),
+			  .sel(AluSrc1_ex),
+			  .C(mux_result1)
+		 );
+		 
+		 mux_4to1 #(S, V) AluSrc3_mux(
+			  .A(RSV3_ex),
+			  .B(RSS3_ex),
+			  .C(imm_ex),
+			  .D(RSS1_ex),
+			  .sel(ALUSrc3_ex),
+			  .E(mux_result3)
+		 );
 
     // ALU with 6 lanes (192-bits, 32-bits)
+	 
+		 alu_6lanes #(V, S) alu(
+			  .A(mux_result2),
+			  .B(mux_result3),
+			  .op(AluOp_ex),
+			  .sel(VectorOp_ex),
+			  .C(aluResult_ex),
+			  .flagZ(flagZ)
+		 );
     
 
     // PC/Imm adder
+	 
+		 adder #(S) adderEx(
+			  .A(pc_ex),
+			  .B(imm_ex),
+			  .C(pc_jump)
+		 );
     
 
     // Jump logic
-    
+	 
+		 jump_unit jump(
+			  .FlagZ(flagZ),
+			  .JumpCD(JumpCD_ex),
+			  .JumpCI(JumpCI_ex),
+			  .JumpI(JumpI_ex),
+			  .PCSource(PCSrc_ex)
+		 );
+		 
 
     //---------------------------------------------------------------------------------------------
     // Execution/Memory pipeline
