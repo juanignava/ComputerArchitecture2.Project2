@@ -3,8 +3,8 @@
     input  logic[1:0] instruction_type, func,
     input  logic      rst, imm, vector,
     output logic      JumpI, JumpCI, JumpCD, MemToReg, MemWrite, ImmSrc, VectorOp,
-                      ALUSrc1, ALUSrc3, RegVWrite, RegSWrite,
-    output logic[1:0] ALUOp, ALUSrc2
+                      ALUSrc1, ALUSrc2, RegVWrite, RegSWrite,
+    output logic[1:0] ALUOp, ALUSrc3
 );
             
     always_latch begin

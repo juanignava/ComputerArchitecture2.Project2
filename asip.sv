@@ -69,7 +69,7 @@ module asip
 
     // Write back signals
 	 
-	 logic[V-1:0]  wd_wb, aluResult_wb, muxResult_wb;
+	 logic[V-1:0]  data_wb, aluResult_wb, muxResult_wb;
 	 logic[3:0]		RD_wb;
 	 logic			MemToReg_wb, RegVWrite_wb, RegSWrite_wb;
     
@@ -131,20 +131,74 @@ module asip
     //---------------------------------------------------------------------------------------------
     // Instruction decode stage
     //---------------------------------------------------------------------------------------------
+	 
     // Scalar register (32-bits)
+	 
+		 register_scalar #(S) reg_scalar(
+		 
+			 .RS1(regSrc1),
+			 .RS2(regSrc2),
+			 .RS3(regSrc3),
+			 .RD(RD_wb),
+			 .WD(muxResult_wb[31:0]),
+			 .wr_enable(RegSWrite_wb),
+			 .clk(clk),
+			 .rst(rst),
+			 .RD1(RSS1_decode),
+			 .RD2(RSS2_decode),
+			 .RD3(RSS3_decode)
+		 );
     
     
 
     // Vectorial register (192-bits)
+	 
+		 register_vectorial #(V) reg_vectorial(
+			 .RS1(regSrc1),
+			 .RS2(regSrc2),
+			 .RS3(regSrc3),
+			 .RD(RD_wb),
+			 .WD(muxResult_wb),
+			 .wr_enable(RegVWrite_wb),
+			 .clk(clk),
+			 .rst(rst), 
+			 .RD1(RSV1_decode),
+			 .RD2(RSV2_decode),
+			 .RD3(RSV3_decode)
+		);  
    
 
     // Sign extension
-   
+	 
+		 sign_extend sign_ext(
+			 .num_in(imm),
+			 .imm_src(ImmSrc_decode),
+			 .num_out(imm_decode)
+		 );
     
 
     // Control unit
-    
-    
+	 
+		 control_unit cu(
+			 .instruction_type(op), 
+			 .func(func),
+			 .rst(rst), 
+			 .imm(I), 
+			 .vector(Vector),
+			 .JumpI( JumpI_decode), 
+			 .JumpCI(JumpCI_decode), 
+			 .JumpCD(JumpCD_decode), 
+			 .MemToReg(MemToReg_decode), 
+			 .MemWrite(MemWrite_decode), 
+			 .ImmSrc(ImmSrc_decode), 
+			 .VectorOp(VectorOp_decode),
+			 .ALUSrc1(AluSrc1_decode), 
+			 .ALUSrc3(AluSrc3_decode), 
+			 .RegVWrite(RegVWrite_Decode), 
+			 .RegSWrite(RegSWrite_decode),
+			 .ALUOp(AluOp_decode), 
+			 .ALUSrc2(AluSrc2_decode)
+		);
 
     //---------------------------------------------------------------------------------------------
     // Instruction Decode/Execution pipeline
