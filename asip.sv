@@ -32,7 +32,7 @@ module asip
     // Instruction decode signals
 	 logic[S-1:0]  pc_decode;
 	 logic[25:0]	imm;
-	 logic[3:0]		regSrc1_RD, regSrc2, regSrc3;
+	 logic[3:0]		regSrc1, regSrc2, regSrc3;
 	 logic[1:0]    op, func;
 	 logic 		   I, Vector;
 	 
@@ -56,6 +56,7 @@ module asip
 	 
 	 logic[V-1:0]  mux_result2, mux_result3, wd_ex, aluResult_ex;
 	 logic[S-1:0]	pc_jump;
+	 logic 			PCSrc_ex;
     
 
     // Memory signals
@@ -76,13 +77,55 @@ module asip
     //---------------------------------------------------------------------------------------------
     // Instruction fetch stage
     //---------------------------------------------------------------------------------------------
-
+	
+	// PC Register
+		pc_register #(S) pc(
+			 .clk(clk),
+			 .clr(rst),
+			 .load(1'b1),
+			 .pc_in(pc_in),
+			 .pc_out(pc_fetch)
+		 );
+		 
+		 // Add 1 to pc to move to next instruction
+		 // Compute next PC (32-bits)
+		 adder #(S) addPC(
+			  .A(pc_fetch),
+			  .B(32'b1),
+			  .C(pc_plus1)
+		 );
+		 
+		 // Mux to select the PC (32-bits)
+		 mux_2to1 #(S, S, S) pc_mux(
+			  // PC counter from execution stage, used to jump
+			  .A(pc_jump),
+			  // Next PC
+			  .B(pc_plus1),
+			  // PC select based on jump unit output
+			  .sel(PCSrc_ex),
+			  .C(pc_in)
+		 );
     
 
     //---------------------------------------------------------------------------------------------
     // Instruction Fetch/Instruction Decode pipeline
     //---------------------------------------------------------------------------------------------
     
+		 segment_if_id(
+		 .clk(clk),
+		 .rst(rst),
+		 .pc_out(pc_fetch),
+		 .instruction(instruction),
+		 .pc(pc_decode),
+		 .op(op),
+		 .func(func),
+		 .I(I),
+		 .V(Vector),
+		 .RS1(regSrc1),
+		 .RS3(regSrc3),
+		 .RS2(regSrc2),
+		 .imm(imm)
+	);
    
 
     //---------------------------------------------------------------------------------------------
