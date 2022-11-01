@@ -39,7 +39,7 @@
 
 set_global_assignment -name FAMILY "Cyclone V"
 set_global_assignment -name DEVICE 5CSEMA5F31C6
-set_global_assignment -name TOP_LEVEL_ENTITY memoryController_tb
+set_global_assignment -name TOP_LEVEL_ENTITY control_unit_tb
 set_global_assignment -name ORIGINAL_QUARTUS_VERSION 20.1.1
 set_global_assignment -name PROJECT_CREATION_TIME_DATE "16:53:58  OCTOBER 30, 2022"
 set_global_assignment -name LAST_QUARTUS_VERSION "20.1.1 Lite Edition"
@@ -68,6 +68,30 @@ set_global_assignment -name SYSTEMVERILOG_FILE memoryController.sv
 set_global_assignment -name SYSTEMVERILOG_FILE imem.sv
 set_global_assignment -name SYSTEMVERILOG_FILE imem_rom_tb.sv
 set_global_assignment -name SYSTEMVERILOG_FILE memoryController_tb.sv
+set_global_assignment -name SYSTEMVERILOG_FILE pc_register.sv
+set_global_assignment -name SYSTEMVERILOG_FILE pc_register_tb.sv
+set_global_assignment -name SYSTEMVERILOG_FILE mux_2to1_tb.sv
+set_global_assignment -name SYSTEMVERILOG_FILE mux_2to1.sv
+set_global_assignment -name SYSTEMVERILOG_FILE adder.sv
+set_global_assignment -name SYSTEMVERILOG_FILE adder_tb.sv
+set_global_assignment -name SYSTEMVERILOG_FILE alu_6lanes.sv
+set_global_assignment -name SYSTEMVERILOG_FILE alu_tb.sv
+set_global_assignment -name SYSTEMVERILOG_FILE jump_unit.sv
+set_global_assignment -name SYSTEMVERILOG_FILE jump_unit_tb.sv
+set_global_assignment -name SYSTEMVERILOG_FILE mux_4to1.sv
+set_global_assignment -name SYSTEMVERILOG_FILE mux_4to1_tb.sv
+set_global_assignment -name SYSTEMVERILOG_FILE register_scalar.sv
+set_global_assignment -name SYSTEMVERILOG_FILE register_scalar_tb.sv
+set_global_assignment -name SYSTEMVERILOG_FILE register_vectorial.sv
+set_global_assignment -name SYSTEMVERILOG_FILE register_vectorial_tb.sv
+set_global_assignment -name SYSTEMVERILOG_FILE sign_extend.sv
+set_global_assignment -name SYSTEMVERILOG_FILE sign_extend_tb.sv
+set_global_assignment -name SYSTEMVERILOG_FILE segment_if_id.sv
+set_global_assignment -name SYSTEMVERILOG_FILE segment_id_ex.sv
+set_global_assignment -name SYSTEMVERILOG_FILE segment_ex_mem.sv
+set_global_assignment -name SYSTEMVERILOG_FILE segment_mem_wb.sv
+set_global_assignment -name SYSTEMVERILOG_FILE control_unit.sv
+set_global_assignment -name SYSTEMVERILOG_FILE control_unit_tb.sv
 set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
 set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
 set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top

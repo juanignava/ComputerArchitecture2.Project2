@@ -11,8 +11,11 @@ module dmem_rom2
     logic [S-1:0] dmem_ROM[0:SIZE-1];
     
     initial
-       $readmemb("C:/Users/juan navarro/Documents/Implementaciones Arqui 2/ComputerArchitecture2.Project2/imageOutput.txt", dmem_ROM);
+	 // Directorio Nacho N
+       //$readmemb("C:/Users/juan navarro/Documents/Implementaciones Arqui 2/ComputerArchitecture2.Project2/imageOutput.txt", dmem_ROM);
 
+		 // Directorio Moni
+       $readmemb("C:/MySpot/ComputerArchitecture2.Project2/imageOutput.txt", dmem_ROM);
 
     assign rd = {{5*S{1'd0}}, dmem_ROM[address[S-1:0]]};
 endmodule
