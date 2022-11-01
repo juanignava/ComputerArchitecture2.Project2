@@ -39,7 +39,7 @@
 
 set_global_assignment -name FAMILY "Cyclone V"
 set_global_assignment -name DEVICE 5CSEMA5F31C6
-set_global_assignment -name TOP_LEVEL_ENTITY memoryController_tb
+set_global_assignment -name TOP_LEVEL_ENTITY VGA_test
 set_global_assignment -name ORIGINAL_QUARTUS_VERSION 20.1.1
 set_global_assignment -name PROJECT_CREATION_TIME_DATE "16:53:58  OCTOBER 30, 2022"
 set_global_assignment -name LAST_QUARTUS_VERSION "20.1.1 Lite Edition"
@@ -68,7 +68,41 @@ set_global_assignment -name SYSTEMVERILOG_FILE memoryController.sv
 set_global_assignment -name SYSTEMVERILOG_FILE imem.sv
 set_global_assignment -name SYSTEMVERILOG_FILE imem_rom_tb.sv
 set_global_assignment -name SYSTEMVERILOG_FILE memoryController_tb.sv
+set_global_assignment -name SYSTEMVERILOG_FILE VGA_test.sv
+set_global_assignment -name SYSTEMVERILOG_FILE vga_controller.sv
+set_global_assignment -name SYSTEMVERILOG_FILE VGAControllerTest.sv
 set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
 set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
 set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
+set_location_assignment PIN_J14 -to b[7]
+set_location_assignment PIN_G15 -to b[6]
+set_location_assignment PIN_F15 -to b[5]
+set_location_assignment PIN_H14 -to b[4]
+set_location_assignment PIN_F14 -to b[3]
+set_location_assignment PIN_H13 -to b[2]
+set_location_assignment PIN_G13 -to b[1]
+set_location_assignment PIN_B13 -to b[0]
+set_location_assignment PIN_AF14 -to clk
+set_location_assignment PIN_E11 -to g[7]
+set_location_assignment PIN_F11 -to g[6]
+set_location_assignment PIN_G12 -to g[5]
+set_location_assignment PIN_G11 -to g[4]
+set_location_assignment PIN_G10 -to g[3]
+set_location_assignment PIN_H12 -to g[2]
+set_location_assignment PIN_J10 -to g[1]
+set_location_assignment PIN_J9 -to g[0]
+set_location_assignment PIN_B11 -to hsync
+set_location_assignment PIN_A11 -to n25MHZCLK
+set_location_assignment PIN_F10 -to n_blanc
+set_location_assignment PIN_C10 -to n_sync
+set_location_assignment PIN_F13 -to r[7]
+set_location_assignment PIN_E12 -to r[6]
+set_location_assignment PIN_D12 -to r[5]
+set_location_assignment PIN_C12 -to r[4]
+set_location_assignment PIN_B12 -to r[3]
+set_location_assignment PIN_E13 -to r[2]
+set_location_assignment PIN_C13 -to r[1]
+set_location_assignment PIN_A13 -to r[0]
+set_location_assignment PIN_AE12 -to reset
+set_location_assignment PIN_D11 -to vsync
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
