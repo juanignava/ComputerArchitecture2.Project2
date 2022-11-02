@@ -23,10 +23,8 @@ module asip
 	 input logic switchStart,
 	 
     // VGA output
-    output logic[23:0] rgb,
-    output logic       v_sync,
-    output logic       h_sync,
-    output logic       vga_clk
+    output logic[7:0] r, g, b,
+    output logic       vsync, hsync, n_sync, n_blanc, n25MHZCLK
 );
 
     // RGBA selected values
@@ -78,6 +76,13 @@ module asip
 	 logic[V-1:0]  data_wb, aluResult_wb, muxResult_wb;
 	 logic[3:0]		RD_wb;
 	 logic			MemToReg_wb, RegVWrite_wb, RegSWrite_wb;
+	 
+	 // vga signals
+	 logic [9:0] x, y;
+	 logic [31:0] address, prev_address;
+	 logic [191:0] data;
+	 logic [7:0] r_siguiente,g_siguiente,b_siguiente;
+	 logic video_on;
     
 
     //---------------------------------------------------------------------------------------------
@@ -423,6 +428,48 @@ module asip
     //    .sel(gtype_switch),
     //    .C(gtype)
     //);
+	 
+	 //---------------------------------------------------------------------------------------------
+    // VGA controller
+    //---------------------------------------------------------------------------------------------
+	 
+	 HV_sync 		vga_sync_unit 		(.clk(clk), .reset(reset), .hsync(hsync), .vsync(vsync), .enable(video_on), .clk_out(n25MHZCLK), .x(x), .y(y));
+		 
+	 // ram memory (read only)
+	dmem_rom2 #(S, V, SIZE_RAM) dmem_rom2(
+		.address(address),
+		.rd(data)
+	);
+	
+	
+	
+	 always_ff @(posedge n25MHZCLK)
+		begin
+			// calculate the address
+			if (y < 100 && x < 100) begin
+				address = y * 300 + x*3;
+				prev_address = address;
+				r_siguiente = data[7:0];
+				g_siguiente = data[39:32];
+				b_siguiente = data[71:64];
+			end
+			else begin
+				address = prev_address;
+				r_siguiente = 8'd0;
+				g_siguiente = 8'd0;
+				b_siguiente = 8'd0;
+			end
+				
+			
+				
+		end
+	
+	
+	assign r = (video_on) ? r_siguiente : 8'b0;
+	assign g = (video_on) ? g_siguiente : 8'b0;
+	assign b = (video_on) ? b_siguiente : 8'b0;
+	assign n_sync  =  1'b0;
+	assign n_blanc =  1'b1;
 	 
 	 
 endmodule : asip

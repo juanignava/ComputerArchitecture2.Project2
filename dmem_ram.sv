@@ -20,7 +20,8 @@ module dmem_ram
 
     always @(posedge switchStart)
 		// Directorio Nacho N
-      $writememb("C:/Users/juan navarro/Documents/Implementaciones Arqui 2/ComputerArchitecture2.Project2/imageOutput.txt", dmem_RAM);
+      //$writememb("C:/Users/juan navarro/Documents/Implementaciones Arqui 2/ComputerArchitecture2.Project2/imageOutput.txt", dmem_RAM);
+		$writememb("imageOutput.txt", dmem_RAM);
 		
 		// Directorio Moni
 			//$writememb("C:/MySpot/ComputerArchitecture2.Project2/imageOutput.txt", dmem_RAM);
