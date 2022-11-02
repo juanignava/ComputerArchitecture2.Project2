@@ -97,6 +97,7 @@ SUMI R8, R0, 0
 _vert_loop_rows:
 SUMI R10, R0, 100
 SCI R8, R10, _end_vert_loop_rows
+SUMI R9, R0, 0
 _vert_loop_columns:
 SUMI R10, R0, 100
 SCI R9, R10, _end_vert_loop_columns

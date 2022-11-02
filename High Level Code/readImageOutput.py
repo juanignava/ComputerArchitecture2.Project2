@@ -6,8 +6,8 @@ import imageio.v2 as imageio
 # CONSTANS
 IMAGE_SAVE_PATH = "Images/dog_output.jpeg"
 FILE_PATH_READ = "imageOutput.txt"
-IMAGE_SIZE_X = 250
-IMAGE_SIZE_Y = 200
+IMAGE_SIZE_X = 100
+IMAGE_SIZE_Y = 100
 
 # AUXILIAR IMAGE FUNTIONS
 
@@ -21,10 +21,13 @@ def readListFile(path):
     f = open(path, "r")
 
     lines = f.readlines()
-
+    cont = 0
     for i in lines:
-
-        list.append(i);
+        if (cont < 3):
+            cont += 1
+            continue
+        list.append(i)
+        
 
     f.close()
 
@@ -33,13 +36,13 @@ def readListFile(path):
 """
 Description: function that receives a list of pixels in RGB and converts them into decimal representation
 """
-def hexToDecimal(list):
+def binToDecimal(list):
 
     size = len(list)
 
     for i in range(size):
 
-        list[i] = int(list[i], 16)
+        list[i] = int(list[i], 2)
 
     return list
 
@@ -63,7 +66,10 @@ def saveImage(path, list):
 
                 elem = y * IMAGE_SIZE_X * 3 + x * 3 + pix
 
-                temp_pix.append(list[elem])
+                if (elem == 0):
+                    temp_pix.append(0)
+                else:
+                    temp_pix.append(list[elem])
 
             temp_list.append(temp_pix)
 
@@ -73,5 +79,5 @@ def saveImage(path, list):
 
 # MAIN PROGRAM
 imageList = readListFile(FILE_PATH_READ)
-imageList = hexToDecimal(imageList)
+imageList = binToDecimal(imageList)
 saveImage(IMAGE_SAVE_PATH, imageList)
