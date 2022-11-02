@@ -13,9 +13,9 @@ SUMI R4, R0, 0
 # R5 -> Red1
 # R6 -> Red0
 
-SUMI R5, R5, 61000
+SUMI R5, R0, 61000
 CRG R5, 0(R5)
-SUMI R6, R6, 61001
+SUMI R6, R0, 61001
 CRG R6, 0(R6)
 
 SCD R5, R0, _red1_one
@@ -34,7 +34,7 @@ SUMI R1, R0, 63
 _red_end:
 
 # guardar en memoria
-SUMI R10, R10, 61009
+SUMI R10, R0, 61009
 GRD R1, 0(R10)
 SUMI R10, R10, 3
 GRD R1, 0(R10)
@@ -43,9 +43,9 @@ GRD R1, 0(R10)
 # R5 -> Green1
 # R6 -> Green0
 
-SUMI R5, R5, 61002
+SUMI R5, R0, 61002
 CRG R5, 0(R5)
-SUMI R6, R6, 61003
+SUMI R6, R0, 61003
 CRG R6, 0(R6)
 
 SCD R5, R0, _green1_one
@@ -64,7 +64,7 @@ SUMI R2, R0, 63
 _green_end:
 
 # guardar en memoria
-SUMI R10, R10, 61010
+SUMI R10, R0, 61010
 GRD R2, 0(R10)
 SUMI R10, R10, 3
 GRD R2, 0(R10)
@@ -73,9 +73,9 @@ GRD R2, 0(R10)
 # R5 -> Blue1
 # R6 -> Blue0
 
-SUMI R5, R5, 61004
+SUMI R5, R0, 61004
 CRG R5, 0(R5)
-SUMI R6, R6, 61005
+SUMI R6, R0, 61005
 CRG R6, 0(R6)
 
 SCD R5, R0, _blue1_one
@@ -94,7 +94,7 @@ SUMI R3, R0, 63
 _blue_end:
 
 # guardar en memoria
-SUMI R10, R10, 61011
+SUMI R10, R0, 61011
 GRD R3, 0(R10)
 SUMI R10, R10, 3
 GRD R3, 0(R10)
@@ -103,9 +103,9 @@ GRD R3, 0(R10)
 # R5 -> Trans1
 # R6 -> Trans0
 
-SUMI R5, R5, 61006
+SUMI R5, R0, 61006
 CRG R5, 0(R5)
-SUMI R6, R6, 61007
+SUMI R6, R0, 61007
 CRG R6, 0(R6)
 
 SCD R5, R0, _trans1_one
@@ -124,7 +124,7 @@ SUMI R4, R0, 63
 _trans_end:
 
 # Now R5 -> type, based on the switch value. This is located at mem dir 100508
-SUMI R5, R5, 61008
+SUMI R5, R0, 61008
 CRG R5, 0(R5)
 
 # Define the filter to apply
@@ -167,7 +167,7 @@ SUMI R10, R12, 1000
 CRGV RV1, 0(R10)
 
 # Carga el registro vectorial RV2 con valores de color
-SUMI R10, R10, 61009
+SUMI R10, R0, 61009
 CRGV RV2, 0(R10)
 
 MULEV RV2, RV2, R4
@@ -195,30 +195,42 @@ _end_vert_loop_columns:
 #    with the values of red_step (R5), green_step (R6) and blue_step (R7)
 SUMI R14, R0, 2
 SCI R1, R14, _vert_filter_off_red
+SUMI R14, R0, 1
+SCI R1, R14, _vert_filter_off_red
+SUMI R14, R0, 0
+SCI R1, R14, _vert_filter_off_red
 RES R1, R1, R5
 _vert_filter_off_red:
 # guardar en memoria
-SUMI R10, R10, 61009
+SUMI R10, R0, 61009
 GRD R1, 0(R10)
 SUMI R10, R10, 3
 GRD R1, 0(R10)
 
 SUMI R14, R0, 2
 SCI R2, R14, _vert_filter_off_green
+SUMI R14, R0, 1
+SCI R2, R14, _vert_filter_off_green
+SUMI R14, R0, 0
+SCI R2, R14, _vert_filter_off_green
 RES R2, R2, R6
 _vert_filter_off_green:
 # guardar en memoria
-SUMI R10, R10, 61010
+SUMI R10, R0, 61010
 GRD R2, 0(R10)
 SUMI R10, R10, 3
 GRD R2, 0(R10)
 
 SUMI R14, R0, 2
 SCI R3, R14, _vert_filter_off_blue
+SUMI R14, R0, 1
+SCI R3, R14, _vert_filter_off_blue
+SUMI R14, R0, 0
+SCI R3, R14, _vert_filter_off_blue
 RES R3, R3, R7
 _vert_filter_off_blue:
 # guardar en memoria
-SUMI R10, R10, 61011
+SUMI R10, R0, 61011
 GRD R3, 0(R10)
 SUMI R10, R10, 3
 GRD R3, 0(R10)

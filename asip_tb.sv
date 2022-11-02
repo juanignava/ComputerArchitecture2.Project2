@@ -41,7 +41,7 @@ module asip_tb();
 		// señales iniciales
 		rst = 1;
 		clk = 1;
-		red_switches =4;
+		red_switches =3;
 		green_switches = 0;
 		blue_switches = 0;
 		tran_switches = 1;
