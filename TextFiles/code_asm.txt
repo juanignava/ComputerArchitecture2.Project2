@@ -155,13 +155,13 @@ SCI R8, R10, _end_vert_loop_rows
 # R10 will keep the amount of columns in image
 SUMI R9, R0, 0
 _vert_loop_columns:
-SUMI R10, R0, 100
+SUMI R10, R0, 50
 SCI R9, R10, _end_vert_loop_columns
 
 # Carga el registro vectorial RV1 de la lista imagen R12 contiene la dirección relativa a la imagen
-MULI R10, R8, 100
-MULI R10, R10, 3
-MULI R11, R9, 3
+MULI R10, R8, 300
+#MULI R10, R10, 6
+MULI R11, R9, 6
 SUM R12, R10, R11
 SUMI R10, R12, 1000
 CRGV RV1, 0(R10)
@@ -175,7 +175,7 @@ SUMI R10, R0, 100
 DIVEV RV2, RV2, R10
 
 SUMI R10, R0, 100
-RES R10, R10, R4
+#RES R10, R10, R4
 MULEV RV1, RV1, R10
 SUMI R10, R0, 100
 DIVEV RV1, RV1, R10
@@ -183,7 +183,7 @@ DIVEV RV1, RV1, R10
 SUMV RV3, RV1, RV2
 
 SUMI R10, R12, 31000
-GRDV RV3, 0(R10)
+GRDV RV1, 0(R10)
 
 # Carga el registro de los colores
 
@@ -198,30 +198,30 @@ SCI R1, R14, _vert_filter_off_red
 RES R1, R1, R5
 _vert_filter_off_red:
 # guardar en memoria
-SUMI R10, R10, 61009
-GRD R1, 0(R10)
-SUMI R10, R10, 3
-GRD R1, 0(R10)
+#SUMI R10, R10, 61009
+#GRD R1, 0(R10)
+#SUMI R10, R10, 3
+#GRD R1, 0(R10)
 
 SUMI R14, R0, 2
 SCI R2, R14, _vert_filter_off_green
 RES R2, R2, R6
 _vert_filter_off_green:
 # guardar en memoria
-SUMI R10, R10, 61010
-GRD R2, 0(R10)
-SUMI R10, R10, 3
-GRD R2, 0(R10)
+#SUMI R10, R10, 61010
+#GRD R2, 0(R10)
+#SUMI R10, R10, 3
+#GRD R2, 0(R10)
 
 SUMI R14, R0, 2
 SCI R3, R14, _vert_filter_off_blue
 RES R3, R3, R7
 _vert_filter_off_blue:
 # guardar en memoria
-SUMI R10, R10, 61011
-GRD R3, 0(R10)
-SUMI R10, R10, 3
-GRD R3, 0(R10)
+#SUMI R10, R10, 61011
+#GRD R3, 0(R10)
+#SUMI R10, R10, 3
+#GRD R3, 0(R10)
 
 SUMI R8, R8, 1
 SI _vert_loop_rows

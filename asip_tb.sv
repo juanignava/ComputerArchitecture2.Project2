@@ -48,7 +48,7 @@ module asip_tb();
 		switchStart = 0;
 		rst = 0;
 		
-		#120000;
+		#1800000;
 		
 		switchStart = 1;
 		
