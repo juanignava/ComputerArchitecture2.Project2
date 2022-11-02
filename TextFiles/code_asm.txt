@@ -182,7 +182,7 @@ DIVEV RV1, RV1, R10
 
 SUMV RV3, RV1, RV2
 
-SUMI R10, R12, 61000
+SUMI R10, R12, 31000
 GRDV RV3, 0(R10)
 
 # Carga el registro de los colores
@@ -231,5 +231,6 @@ SI _end
 
 # Center filter on image
 _center_fil:
-SUM R0, R0, R0
+SUM R0, R0, R5
 _end:
+SUM R0, R0, R7

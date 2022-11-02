@@ -841,6 +841,7 @@ registerDictionary = {
 }
 
 instructionElements = getInstructionElements('TextFiles/code_asm_raw.txt')
+#instructionElements = getInstructionElements('High Level Code/assemblyCode.txt')
 
 instructionElements = riskControlUnit(instructionElements, typeDictionary, opcodeDictionary)
 
@@ -852,6 +853,7 @@ labelDictionary, instructionElements = getLabelDictionary(instructionElements)
 
 instructionElements.pop()
 
+#binaryInstructions('High Level Code/instructionsTest.txt', instructionElements, typeDictionary, opcodeDictionary, registerDictionary, labelDictionary)
 binaryInstructions('instructions.txt', instructionElements, typeDictionary, opcodeDictionary, registerDictionary, labelDictionary)
 
 print("Cantidad del bloques: " + str(len(labelDictionary)))

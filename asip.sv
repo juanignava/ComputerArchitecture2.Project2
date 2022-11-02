@@ -385,8 +385,8 @@ module asip
     // Write back stage
     //---------------------------------------------------------------------------------------------
 		 mux_2to1 #(V, V, V) wb_mux(
-			  .A(data_wb), 
-			  .B(aluResult_wb),
+			  .A(aluResult_wb), 
+			  .B(data_wb),
 			  .sel(MemToReg_wb),
 			  .C(muxResult_wb)
 		 );

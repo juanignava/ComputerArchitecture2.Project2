@@ -97,7 +97,6 @@ SUMI R8, R0, 0
 _vert_loop_rows:
 SUMI R10, R0, 100
 SCI R8, R10, _end_vert_loop_rows
-SUMI R9, R0, 0
 _vert_loop_columns:
 SUMI R10, R0, 100
 SCI R9, R10, _end_vert_loop_columns
@@ -118,7 +117,7 @@ MULEV RV1, RV1, R10
 SUMI R10, R0, 100
 DIVEV RV1, RV1, R10
 SUMV RV3, RV1, RV2
-SUMI R10, R12, 61000
+SUMI R10, R12, 31000
 GRDV RV3, 0(R10)
 SUMI R9, R9, 1
 SI _vert_loop_columns
@@ -152,5 +151,6 @@ SI _vert_loop_rows
 _end_vert_loop_rows:
 SI _end
 _center_fil:
-SUM R0, R0, R0
+SUM R0, R0, R5
 _end:
+SUM R0, R0, R7
