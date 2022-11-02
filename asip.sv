@@ -1,7 +1,10 @@
 module asip
 #(
     parameter V=192,
-    parameter S=32
+    parameter S=32,
+	 parameter SIZE_INS = 1000,
+	 parameter SIZE_ROM = 30000,
+	 parameter SIZE_RAM = 30015
 )
 (
     // Clock 50Mhz
@@ -339,8 +342,19 @@ module asip
     //---------------------------------------------------------------------------------------------
     // Memory stage
     //---------------------------------------------------------------------------------------------
-    // 32-bits scalar, 192-bits vec, 10 instructions, 30000 for ROM, 30000 for RAM, 5 registers for
-    // switches
+	 
+		 memoryController #(S, V, SIZE_INS, SIZE_ROM, SIZE_RAM) memory(
+			 .clk(clk),
+			 .rst(rst),
+			 .we(MemWrite_mem),
+			 .VecOp(VectorOp_mem),
+			 .switchStart(1'b1),
+			 .pc(pc_fetch),
+			 .address(aluResult_mem[31:0]),
+			 .wd(wd_mem),
+			 .instruction(instruction),
+			 .rd(data_mem)
+	);
    
 
     //---------------------------------------------------------------------------------------------
