@@ -171,19 +171,19 @@ SUMI R10, R10, 61009
 CRGV RV2, 0(R10)
 
 MULEV RV2, RV2, R4
-SUMI R10, R0, 100
+SUMI R10, R0, 255
 DIVEV RV2, RV2, R10
 
-SUMI R10, R0, 100
-#RES R10, R10, R4
+SUMI R10, R0, 255
+RES R10, R10, R4
 MULEV RV1, RV1, R10
-SUMI R10, R0, 100
+SUMI R10, R0, 255
 DIVEV RV1, RV1, R10
 
 SUMV RV3, RV1, RV2
 
 SUMI R10, R12, 31000
-GRDV RV1, 0(R10)
+GRDV RV3, 0(R10)
 
 # Carga el registro de los colores
 
@@ -198,30 +198,30 @@ SCI R1, R14, _vert_filter_off_red
 RES R1, R1, R5
 _vert_filter_off_red:
 # guardar en memoria
-#SUMI R10, R10, 61009
-#GRD R1, 0(R10)
-#SUMI R10, R10, 3
-#GRD R1, 0(R10)
+SUMI R10, R10, 61009
+GRD R1, 0(R10)
+SUMI R10, R10, 3
+GRD R1, 0(R10)
 
 SUMI R14, R0, 2
 SCI R2, R14, _vert_filter_off_green
 RES R2, R2, R6
 _vert_filter_off_green:
 # guardar en memoria
-#SUMI R10, R10, 61010
-#GRD R2, 0(R10)
-#SUMI R10, R10, 3
-#GRD R2, 0(R10)
+SUMI R10, R10, 61010
+GRD R2, 0(R10)
+SUMI R10, R10, 3
+GRD R2, 0(R10)
 
 SUMI R14, R0, 2
 SCI R3, R14, _vert_filter_off_blue
 RES R3, R3, R7
 _vert_filter_off_blue:
 # guardar en memoria
-#SUMI R10, R10, 61011
-#GRD R3, 0(R10)
-#SUMI R10, R10, 3
-#GRD R3, 0(R10)
+SUMI R10, R10, 61011
+GRD R3, 0(R10)
+SUMI R10, R10, 3
+GRD R3, 0(R10)
 
 SUMI R8, R8, 1
 SI _vert_loop_rows

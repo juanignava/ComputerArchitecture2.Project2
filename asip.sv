@@ -4,7 +4,7 @@ module asip
     parameter S=32,
 	 parameter SIZE_INS = 1000,
 	 parameter SIZE_ROM = 30000,
-	 parameter SIZE_RAM = 30015
+	 parameter SIZE_RAM = 30030
 )
 (
     // Clock 50Mhz
@@ -14,7 +14,7 @@ module asip
     input logic        rst,
 	 
     // RGB switches
-    input logic[1:0]   red_switches, green_switches, blue_switches,
+    input logic[1:0]   red_switches, green_switches, blue_switches, tran_switches,
 	 
     // Gradient switch
     input logic        gtype_switch,

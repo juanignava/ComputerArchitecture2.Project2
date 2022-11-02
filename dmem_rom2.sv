@@ -12,8 +12,8 @@ module dmem_rom2
     
     initial
 	 // Directorio Nacho N
-       //$readmemb("C:/Users/juan navarro/Documents/Implementaciones Arqui 2/ComputerArchitecture2.Project2/imageOutput.txt", dmem_ROM);
-		 $readmemb("imageOutput.txt", dmem_ROM);
+       $readmemb("C:/Users/juan navarro/Documents/Implementaciones Arqui 2/ComputerArchitecture2.Project2/imageOutput.txt", dmem_ROM);
+		 //$readmemb("imageOutput.txt", dmem_ROM);
 
 		 // Directorio Moni
        //$readmemb("C:/MySpot/ComputerArchitecture2.Project2/imageOutput.txt", dmem_ROM);

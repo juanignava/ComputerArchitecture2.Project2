@@ -6,25 +6,29 @@ module asip_tb();
 	logic [1:0] red_switches;
 	logic [1:0] green_switches;
 	logic [1:0] blue_switches;
+	logic [1:0] tran_switches;
 	logic gtype_switch;
 	logic switchStart;
 	
-   logic[23:0] rgb;
-   logic v_sync;
-   logic h_sync;
-   logic vga_clk;
+   logic[7:0] r, g, b;
+   logic vsync, hsync, n_sync, n_blanc, n25MHZCLK;
 		
 	asip procesador_vectorial(clk,
 	                          rst,
 							 		  red_switches,
 									  green_switches,
 									  blue_switches,
+									  tran_switches,
 									  gtype_switch,
 									  switchStart,
-									  rgb,
-									  v_sync,
-									  h_sync,
-									  vga_clk);
+									  r, 
+									  g, 
+									  b,
+									  vsync, 
+									  hsync, 
+									  n_sync, 
+									  n_blanc, 
+									  n25MHZCLK);
 	
 	always begin
 	
@@ -40,6 +44,7 @@ module asip_tb();
 		red_switches =4;
 		green_switches = 0;
 		blue_switches = 0;
+		tran_switches = 1;
 		gtype_switch = 0;
 		switchStart = 1;
 				

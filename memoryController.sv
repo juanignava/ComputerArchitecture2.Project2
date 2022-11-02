@@ -4,7 +4,7 @@ module memoryController
 	parameter V = 192,
 	parameter SIZE_INS = 1000,
 	parameter SIZE_ROM = 30000,
-	parameter SIZE_RAM = 30015
+	parameter SIZE_RAM = 30030
 )
 (
 	input logic 			clk,
