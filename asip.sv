@@ -356,7 +356,7 @@ module asip
 			 .rst(rst),
 			 .we(MemWrite_mem),
 			 .VecOp(VectorOp_mem),
-			 .switchStart(switchStart),
+			 .switchStart(~switchStart),
 			 .pc(pc_fetch),
 			 .address(aluResult_mem[31:0]),
 			 .wd(wd_mem),
