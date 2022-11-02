@@ -16,7 +16,11 @@ module memoryController
 	input logic[S-1:0]	address,
 	input logic[V-1:0]	wd,
 	output logic[S-1:0]	instruction,
-	output logic[V-1:0]	rd
+	output logic[V-1:0]	rd,
+	
+	input logic[1:0]   red_switches, green_switches, blue_switches, tran_switches,
+	 
+   input logic        gtype_switch
 );
 
 	logic [S-1:0] address_ins, address_rom, address_ram, instructionData;
@@ -43,7 +47,12 @@ module memoryController
 		.we(we),
 		.address(address_ram),
 		.wd(wd),
-		.rd(ramData)
+		.rd(ramData),
+		.red_switches(red_switches),
+		.green_switches(green_switches),
+		.blue_switches(blue_switches),
+		.tran_switches(tran_switches),
+		.gtype_switch(gtype_switch)
 	); 
 	
 	// ram memory (read only)

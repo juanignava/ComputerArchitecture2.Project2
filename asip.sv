@@ -361,7 +361,12 @@ module asip
 			 .address(aluResult_mem[31:0]),
 			 .wd(wd_mem),
 			 .instruction(instruction),
-			 .rd(data_mem)
+			 .rd(data_mem),
+			 .red_switches(red_switches),
+			 .green_switches(green_switches),
+			 .blue_switches(blue_switches),
+			 .tran_switches(tran_switches),
+			 .gtype_switch(gtype_switch)
 	);
    
 

@@ -11,7 +11,11 @@ module dmem_ram
     input  logic        we,
     input  logic[S-1:0] address,
     input  logic[V-1:0] wd,
-    output logic[V-1:0] rd
+    output logic[V-1:0] rd,
+	 
+	 input logic[1:0]   red_switches, green_switches, blue_switches, tran_switches,
+	 
+    input logic        gtype_switch
 );
     logic[S-1:0] dmem_RAM[0:SIZE-1] = '{SIZE{32'd0}};
 	 //logic[S-1:0] rdTemp0, rdTemp1, rdTemp2, rdTemp3, rdTemp4, rdTemp5;
@@ -66,6 +70,19 @@ module dmem_ram
             
         end
     end
+	 
+	 // map memory
+	 always_ff @(red_switches,  green_switches, blue_switches, tran_switches, gtype_switch) begin
+		dmem_RAM[30000] <= red_switches[0];
+		dmem_RAM[30001] <= red_switches[1];
+		dmem_RAM[30002] <= green_switches[0];
+		dmem_RAM[30003] <= green_switches[1];
+		dmem_RAM[30004] <= blue_switches[0];
+		dmem_RAM[30005] <= blue_switches[1];
+		dmem_RAM[30006] <= tran_switches[0];
+		dmem_RAM[30007] <= tran_switches[1];
+		dmem_RAM[30008] <= gtype_switch;
+	 end
 
     assign rd = 0;//{{V-S{1'd0}}, dmem_RAM[address[S-1:0]]};//{rdTemp5, rdTemp4, rdTemp3, rdTemp2, rdTemp1, rdTemp0};
 endmodule : dmem_ram
