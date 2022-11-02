@@ -1,4 +1,7 @@
 # binary => string
+from multiprocessing.sharedctypes import Value
+
+
 def twoComplement(binary):
 
     aux = ""
@@ -591,6 +594,9 @@ def getInstructionElements(filename):
 
     # loop to iterate the code file line by line
     for line in codeLines:
+        print(line)
+        if line[0] == "\n" or line[0] == "#":
+            continue 
         
         # variable to know if the current instruction is a memory one (type 01)
         memoryFlag = 0   
@@ -840,7 +846,7 @@ registerDictionary = {
     "RV7": "0111",	
 }
 
-instructionElements = getInstructionElements('TextFiles/code_asm_raw.txt')
+instructionElements = getInstructionElements('TextFiles/code_asm.txt')
 
 #instructionElements = riskControlUnit(instructionElements, typeDictionary, opcodeDictionary)
 
