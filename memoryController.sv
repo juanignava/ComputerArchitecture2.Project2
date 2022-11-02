@@ -57,6 +57,7 @@ module memoryController
 	
 	// ram memory (read only)
 	dmem_rom2 #(S, V, SIZE_RAM) dmem_rom2(
+		.switchStart(switchStart),
 		.address(address_ram),
 		.rd(ramData2)
 	);
@@ -83,7 +84,7 @@ module memoryController
 			else if (address >= 'd31000 && address < 'd61015)
 			begin
 				address_ram = address - 'd31000;
-				rd = ramData;
+				rd = ramData2;
 			end
 			
 			// if addres is different

@@ -33,7 +33,7 @@ module asip_tb();
 	always begin
 	
 		#1 clk = ~clk; // medio ciclo de reloj equivale a una unidad
-		#1 switchStart  = ~switchStart;
+		#10 switchStart  = ~switchStart;
 		
 	end
 	

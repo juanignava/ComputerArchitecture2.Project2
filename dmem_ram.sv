@@ -84,5 +84,5 @@ module dmem_ram
 		dmem_RAM[30008] <= gtype_switch;
 	 end
 
-    assign rd = {dmem_RAM[address[S-1:0]+5], dmem_RAM[address[S-1:0]+4], dmem_RAM[address[S-1:0]+3], dmem_RAM[address[S-1:0]+2], dmem_RAM[address[S-1:0]+1], dmem_RAM[address[S-1:0]]};//{{V-S{1'd0}}, dmem_RAM[address[S-1:0]]};//{rdTemp5, rdTemp4, rdTemp3, rdTemp2, rdTemp1, rdTemp0};
+    assign rd = 0;//{dmem_RAM[address[S-1:0]+5], dmem_RAM[address[S-1:0]+4], dmem_RAM[address[S-1:0]+3], dmem_RAM[address[S-1:0]+2], dmem_RAM[address[S-1:0]+1], dmem_RAM[address[S-1:0]]};//{{V-S{1'd0}}, dmem_RAM[address[S-1:0]]};//{rdTemp5, rdTemp4, rdTemp3, rdTemp2, rdTemp1, rdTemp0};
 endmodule : dmem_ram

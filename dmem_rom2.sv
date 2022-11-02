@@ -5,12 +5,14 @@ module dmem_rom2
     parameter SIZE=30015
 )
 (
+	 input  logic        switchStart,
     input  logic[S-1:0] address,
     output logic[V-1:0] rd
 );
     logic [S-1:0] dmem_ROM[0:SIZE-1];
     
-    initial
+    //initial
+	 always @(posedge switchStart)
 	 // Directorio Nacho N
        $readmemb("C:/Users/juan navarro/Documents/Implementaciones Arqui 2/ComputerArchitecture2.Project2/imageOutput.txt", dmem_ROM);
 		 //$readmemb("imageOutput.txt", dmem_ROM);
