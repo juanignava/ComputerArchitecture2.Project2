@@ -52,9 +52,9 @@ module asip
 	 
 	 logic[3:0]		RD_ex;
 	 logic[1:0] 	AluOp_ex, AluSrc3_ex;
-	 logic			JumpI_ex, JumpCI_ex, JumpCD_ex, MemToReg_ex, MemWrite_x, VectorOp_ex, AluSrc1_ex, AluSrc2_ex, RegVWrite_ex, RegSWrite_ex;
+	 logic			JumpI_ex, JumpCI_ex, JumpCD_ex, MemToReg_ex, MemWrite_ex, VectorOp_ex, AluSrc1_ex, AluSrc2_ex, RegVWrite_ex, RegSWrite_ex;
 	 
-	 logic[V-1:0]  mux_result2, mux_result3, wd_ex, aluResult_ex;
+	 logic[V-1:0]  mux_result1, mux_result2, mux_result3, wd_ex, aluResult_ex;
 	 logic[S-1:0]	pc_jump;
 	 logic 			PCSrc_ex, flagZ;
     
@@ -193,11 +193,11 @@ module asip
 			 .ImmSrc(ImmSrc_decode), 
 			 .VectorOp(VectorOp_decode),
 			 .ALUSrc1(AluSrc1_decode), 
-			 .ALUSrc3(AluSrc3_decode), 
+			 .ALUSrc2(AluSrc2_decode), 
 			 .RegVWrite(RegVWrite_decode), 
 			 .RegSWrite(RegSWrite_decode),
 			 .ALUOp(AluOp_decode), 
-			 .ALUSrc2(AluSrc2_decode)
+			 .ALUSrc3(AluSrc3_decode)
 		);
 
     //---------------------------------------------------------------------------------------------
@@ -275,7 +275,7 @@ module asip
 			  .B(RSS3_ex),
 			  .C(imm_ex),
 			  .D(RSS1_ex),
-			  .sel(ALUSrc3_ex),
+			  .sel(AluSrc3_ex),
 			  .E(mux_result3)
 		 );
 
@@ -335,7 +335,7 @@ module asip
 			 .mux1_out(wd_mem),
 			 .RD_out(RD_mem)
 		);
-
+		
     //---------------------------------------------------------------------------------------------
     // Memory stage
     //---------------------------------------------------------------------------------------------
@@ -367,7 +367,12 @@ module asip
     //---------------------------------------------------------------------------------------------
     // Write back stage
     //---------------------------------------------------------------------------------------------
-    // Mux Write Back (32-bits)
+		 mux_2to1 #(S, V, V) wb_mux(
+			  .A(data_wb), 
+			  .B(aluResult_wb),
+			  .sel(MemToReg_wb),
+			  .C(muxResult_wb)
+		 );
    
 
     //---------------------------------------------------------------------------------------------
@@ -401,5 +406,6 @@ module asip
     //    .sel(gtype_switch),
     //    .C(gtype)
     //);
+	 
 	 
 endmodule : asip
