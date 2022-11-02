@@ -5,7 +5,7 @@ import imageio.v2 as imageio
 
 # CONSTANS
 IMAGE_SAVE_PATH = "Images/dog_output.jpeg"
-FILE_PATH_READ = "TextFiles/outputPixels.txt"
+FILE_PATH_READ = "imageOutput.txt"
 IMAGE_SIZE_X = 250
 IMAGE_SIZE_Y = 200
 

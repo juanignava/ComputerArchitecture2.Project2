@@ -19,6 +19,9 @@ module asip
     // Gradient switch
     input logic        gtype_switch,
 	 
+	 // Switch start
+	 input logic switchStart,
+	 
     // VGA output
     output logic[23:0] rgb,
     output logic       v_sync,
@@ -348,7 +351,7 @@ module asip
 			 .rst(rst),
 			 .we(MemWrite_mem),
 			 .VecOp(VectorOp_mem),
-			 .switchStart(1'b1),
+			 .switchStart(switchStart),
 			 .pc(pc_fetch),
 			 .address(aluResult_mem[31:0]),
 			 .wd(wd_mem),

@@ -14,10 +14,10 @@ module dmem_rom
     
     initial
 		// Directorio Nacho N
-      //$readmemb("C:/Users/juan navarro/Documents/Implementaciones Arqui 2/ComputerArchitecture2.Project2/imageData.txt", dmem_ROM);
+      $readmemb("C:/Users/juan navarro/Documents/Implementaciones Arqui 2/ComputerArchitecture2.Project2/imageData.txt", dmem_ROM);
 		
 		// Directorio Moni
-      $readmemb("C:/MySpot/ComputerArchitecture2.Project2/imageData.txt", dmem_ROM);
+      //$readmemb("C:/MySpot/ComputerArchitecture2.Project2/imageData.txt", dmem_ROM);
 
     always_comb begin
         if (isVector == 1) begin

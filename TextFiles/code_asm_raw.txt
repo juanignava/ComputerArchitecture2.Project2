@@ -1,0 +1,156 @@
+SUMI R1, R0, 0
+SUMI R2, R0, 0
+SUMI R3, R0, 0
+SUMI R4, R0, 0
+SUMI R5, R5, 61000
+CRG R5, 0(R5)
+SUMI R6, R6, 61001
+CRG R6, 0(R6)
+SCD R5, R0, _red1_one
+SCD R6, R0, _red0_one
+SUMI R1, R0, 0
+SI _red_end
+_red1_one:
+SCD R6, R0, _red1_0_one
+SUMI R1, R0, 191
+SI _red_end
+_red1_0_one:
+SUMI R1, R0, 255
+SI _red_end
+_red0_one:
+SUMI R1, R0, 63
+_red_end:
+SUMI R10, R10, 61009
+GRD R1, 0(R10)
+SUMI R10, R10, 3
+GRD R1, 0(R10)
+SUMI R5, R5, 61002
+CRG R5, 0(R5)
+SUMI R6, R6, 61003
+CRG R6, 0(R6)
+SCD R5, R0, _green1_one
+SCD R6, R0, _green0_one
+SUMI R2, R0, 0
+SI _green_end
+_green1_one:
+SCD R6, R0, _green1_0_one
+SUMI R2, R0, 191
+SI _green_end
+_green1_0_one:
+SUMI R2, R0, 255
+SI _green_end
+_green0_one:
+SUMI R2, R0, 63
+_green_end:
+SUMI R10, R10, 61010
+GRD R2, 0(R10)
+SUMI R10, R10, 3
+GRD R2, 0(R10)
+SUMI R5, R5, 61004
+CRG R5, 0(R5)
+SUMI R6, R6, 61005
+CRG R6, 0(R6)
+SCD R5, R0, _blue1_one
+SCD R6, R0, _blue0_one
+SUMI R3, R0, 0
+SI _blue_end
+_blue1_one:
+SCD R6, R0, _blue1_0_one
+SUMI R3, R0, 191
+SI _blue_end
+_blue1_0_one:
+SUMI R3, R0, 255
+SI _blue_end
+_blue0_one:
+SUMI R3, R0, 63
+_blue_end:
+SUMI R10, R10, 61011
+GRD R3, 0(R10)
+SUMI R10, R10, 3
+GRD R3, 0(R10)
+SUMI R5, R5, 61006
+CRG R5, 0(R5)
+SUMI R6, R6, 61007
+CRG R6, 0(R6)
+SCD R5, R0, _trans1_one
+SCD R6, R0, _trans0_one
+SUMI R4, R0, 0
+SI _trans_end
+_trans1_one:
+SCD R6, R0, _trans1_0_one
+SUMI R4, R0, 191
+SI _trans_end
+_trans1_0_one:
+SUMI R4, R0, 255
+SI _trans_end
+_trans0_one:
+SUMI R4, R0, 63
+_trans_end:
+SUMI R5, R5, 61008
+CRG R5, 0(R5)
+SCD R5, R0, _center_fil
+_vert_fil:
+SUMI R5, R0, 2
+SUMI R6, R0, 2
+SUMI R7, R0, 2
+SUMI R8, R0, 0
+_vert_loop_rows:
+SUMI R10, R0, 100
+SCI R8, R10, _end_vert_loop_rows
+SUMI R9, R0, 0
+_vert_loop_columns:
+SUMI R10, R0, 100
+SCI R9, R10, _end_vert_loop_columns
+MULI R10, R8, 100
+MULI R10, R10, 3
+MULI R11, R9, 3
+SUM R12, R10, R11
+SUMI R10, R12, 1000
+CRGV RV1, 0(R10)
+SUMI R10, R10, 61009
+CRGV RV2, 0(R10)
+MULEV RV2, RV2, R4
+SUMI R10, R0, 100
+DIVEV RV2, RV2, R10
+SUMI R10, R0, 100
+RES R10, R10, R4
+MULEV RV1, RV1, R10
+SUMI R10, R0, 100
+DIVEV RV1, RV1, R10
+SUMV RV3, RV1, RV2
+SUMI R10, R12, 61000
+GRDV RV3, 0(R10)
+SUMI R9, R9, 1
+SI _vert_loop_columns
+_end_vert_loop_columns:
+SUMI R14, R0, 2
+SCI R1, R14, _vert_filter_off_red
+RES R1, R1, R5
+_vert_filter_off_red:
+SUMI R10, R10, 61009
+GRD R1, 0(R10)
+SUMI R10, R10, 3
+GRD R1, 0(R10)
+SUMI R14, R0, 2
+SCI R2, R14, _vert_filter_off_green
+RES R2, R2, R6
+_vert_filter_off_green:
+SUMI R10, R10, 61010
+GRD R2, 0(R10)
+SUMI R10, R10, 3
+GRD R2, 0(R10)
+SUMI R14, R0, 2
+SCI R3, R14, _vert_filter_off_blue
+RES R3, R3, R7
+_vert_filter_off_blue:
+SUMI R10, R10, 61011
+GRD R3, 0(R10)
+SUMI R10, R10, 3
+GRD R3, 0(R10)
+SUMI R8, R8, 1
+SI _vert_loop_rows
+_end_vert_loop_rows:
+SI _end
+_center_fil:
+SUM R0, R0, R0
+_end:
