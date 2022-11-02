@@ -87,7 +87,7 @@ module asip
 	// PC Register
 		pc_register #(S) pc(
 			 .clk(clk),
-			 .clr(rst),
+			 .clr(~rst),
 			 .load(1'b1),
 			 .pc_in(pc_in),
 			 .pc_out(pc_fetch)
@@ -104,9 +104,9 @@ module asip
 		 // Mux to select the PC (32-bits)
 		 mux_2to1 #(S, S, S) pc_mux(
 			  // PC counter from execution stage, used to jump
-			  .A(pc_jump),
+			  .A(pc_plus1),
 			  // Next PC
-			  .B(pc_plus1),
+			  .B(pc_jump),
 			  // PC select based on jump unit output
 			  .sel(PCSrc_ex),
 			  .C(pc_in)
@@ -117,7 +117,7 @@ module asip
     // Instruction Fetch/Instruction Decode pipeline
     //---------------------------------------------------------------------------------------------
     
-		 segment_if_id(
+		 segment_if_id if_id(
 		 .clk(clk),
 		 .rst(rst),
 		 .pc_out(pc_fetch),
@@ -290,8 +290,8 @@ module asip
 		 alu_6lanes #(V, S) alu(
 			  .A(mux_result2),
 			  .B(mux_result3),
-			  .op(AluOp_ex),
-			  .sel(VectorOp_ex),
+			  .op(VectorOp_ex),
+			  .sel(AluOp_ex),
 			  .C(aluResult_ex),
 			  .flagZ(flagZ)
 		 );
@@ -384,7 +384,7 @@ module asip
     //---------------------------------------------------------------------------------------------
     // Write back stage
     //---------------------------------------------------------------------------------------------
-		 mux_2to1 #(S, V, V) wb_mux(
+		 mux_2to1 #(V, V, V) wb_mux(
 			  .A(data_wb), 
 			  .B(aluResult_wb),
 			  .sel(MemToReg_wb),
