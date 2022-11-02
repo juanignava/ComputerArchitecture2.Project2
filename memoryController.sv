@@ -83,7 +83,7 @@ module memoryController
 			else if (address >= 'd31000 && address < 'd61015)
 			begin
 				address_ram = address - 'd31000;
-				rd = ramData2;
+				rd = ramData;
 			end
 			
 			// if addres is different

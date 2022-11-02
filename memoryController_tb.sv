@@ -64,8 +64,10 @@ module memoryController_tb();
 		address = 31000;
 		wd = 3;
 		
-		#10 
+		#30 
 		
+		// de debe leer el valor escrito!!!
+		switchStart = 1;
 		we = 0;
 		 
 		#10
