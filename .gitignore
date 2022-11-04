@@ -215,3 +215,15 @@ $RECYCLE.BIN/
 *.lnk
 
 # End of https://www.toptal.com/developers/gitignore/api/visualstudiocode,python,windows
+db/
+incremental_db/
+output_files/
+simulation/
+ProcesadorVectorial.qsf
+ProcesadorVectorial.qws
+*.sv.bak
+serv_req_info.txt
+ProcesadorVectorial_assignment_defaults.qdf
+
+# Output files
+Images/dog_processed.jpeg
