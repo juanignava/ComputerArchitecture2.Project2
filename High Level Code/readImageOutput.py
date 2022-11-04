@@ -4,7 +4,7 @@ import numpy as np
 import imageio.v2 as imageio
 
 # CONSTANS
-IMAGE_SAVE_PATH = "Images/dog_output.jpeg"
+IMAGE_SAVE_PATH = "Images/estadio_output.jpeg"
 FILE_PATH_READ = "imageOutput.txt"
 IMAGE_SIZE_X = 100
 IMAGE_SIZE_Y = 100
